@@ -12,6 +12,11 @@ public class CardGame {
     ArrayList<Card> deck = new ArrayList<Card>();
     ArrayList<Card> currentHand = new ArrayList<Card>();
 
+
+    public void dealCards(ArrayList<Card> deck) {
+        int counter = 0;
+
+    }
     public CardGame(){
         generateDeck();
     }
@@ -37,5 +42,5 @@ public class CardGame {
     public void addCard(){
 
     }
-    public void dealCards(ArrayList<Card> deck){}
+
 }
