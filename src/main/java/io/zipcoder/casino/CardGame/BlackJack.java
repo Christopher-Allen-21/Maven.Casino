@@ -12,12 +12,6 @@ public class BlackJack<Cards> extends CardGame implements GamblingGameInterface 
     public BlackJack(){}
 
 
-    @Override
-    public void dealCards() {
-
-    }
-
-
     public void askHitOrStay(){}
     public void compareTotals(){}
 

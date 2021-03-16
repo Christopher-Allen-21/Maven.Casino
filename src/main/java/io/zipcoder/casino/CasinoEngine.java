@@ -2,6 +2,7 @@ package io.zipcoder.casino;
 
 import io.zipcoder.casino.CardGame.BlackJack;
 import io.zipcoder.casino.CardGame.GoFishGame;
+import io.zipcoder.casino.GameInterface.DiceGame.ChoHanGame;
 import io.zipcoder.casino.GameInterface.DiceGame.CrapsGame;
 import io.zipcoder.casino.Player.*;
 import io.zipcoder.casino.utilities.Console;
@@ -52,6 +53,7 @@ public class CasinoEngine {
         //May cause issues return player to main screen
         GoFishPlayer goFishPlayer = (GoFishPlayer) currentPlayer;
         GoFishGame goFish = new GoFishGame();
+        //goFish.startGame();
     }
 
     public void runCraps(Player currentPlayer){
@@ -65,7 +67,7 @@ public class CasinoEngine {
         System.out.print("Entering Cho Han\n\n");
         //May cause issues return player to main screen
         ChoHanPlayer choHanPlayer = (ChoHanPlayer) currentPlayer;
-        //ChoHan choHan = new ChoHan();
+        ChoHanGame choHan = new ChoHanGame();
     }
 
 
