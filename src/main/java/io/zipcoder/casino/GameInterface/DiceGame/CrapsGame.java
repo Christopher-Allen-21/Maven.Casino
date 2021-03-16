@@ -1,7 +1,9 @@
 package io.zipcoder.casino.GameInterface.DiceGame;
 
 
-public class CrapsGame extends DiceGame implements GamblingGameInterface{
+import io.zipcoder.casino.GameInterface.GamblingGameInterface;
+
+public class CrapsGame extends DiceGame implements GamblingGameInterface {
     public CrapsGame(){
         super();
     }

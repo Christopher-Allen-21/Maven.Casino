@@ -1,6 +1,6 @@
 package io.zipcoder.casino.CardGame;
 
-public class GoFichGame {
+public class GoFishGame {
     private ArrayLsit<Card> cardStack = new ArrayList<Card>();
 
     public GoFishGame(){}
