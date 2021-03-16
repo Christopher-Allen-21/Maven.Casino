@@ -18,8 +18,13 @@ public class CardGame {
         int counter = 0;
 
     }
+
     public CardGame(){
         generateDeck();
+    }
+
+    public void dealCards() {
+        int counter = 0;
     }
 
     public void generateDeck(){

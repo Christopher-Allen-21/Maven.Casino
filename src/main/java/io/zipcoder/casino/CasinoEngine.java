@@ -52,8 +52,8 @@ public class CasinoEngine {
         System.out.print("Entering Go Fish\n\n");
         //May cause issues return player to main screen
         GoFishPlayer goFishPlayer = (GoFishPlayer) currentPlayer;
-        GoFishGame goFish = new GoFishGame();
-        //goFish.startGame();
+        GoFishGame goFish = new GoFishGame(goFishPlayer);
+        goFish.startGame();
     }
 
     public void runCraps(Player currentPlayer){

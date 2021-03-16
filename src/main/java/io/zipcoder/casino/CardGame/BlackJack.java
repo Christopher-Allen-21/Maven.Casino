@@ -29,7 +29,7 @@ public class BlackJack<Cards> extends CardGame implements GamblingGameInterface 
             setStartingPlayerHand();
             setStartingDealerHand();
             askHitOrStay();
-            getTotals();
+            //getTotals();
             compareTotals();
             checkWinner();
         }
@@ -83,7 +83,7 @@ public class BlackJack<Cards> extends CardGame implements GamblingGameInterface 
     }
     public void aceCheck(Card card){
         if(playerHand.contains(card.getBlackJackValue() == 11));
-            if()
+
 
 
     }
