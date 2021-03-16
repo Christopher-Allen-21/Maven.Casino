@@ -6,7 +6,7 @@ import io.zipcoder.casino.GameInterface.GamblingGameInterface;
 import java.util.ArrayList;
 
 public class BlackJack<Cards> extends CardGame implements GamblingGameInterface {
-    ArrayList<Card> currentHand = new ArrayList<Card>();
+
 
 
     public BlackJack(){}
