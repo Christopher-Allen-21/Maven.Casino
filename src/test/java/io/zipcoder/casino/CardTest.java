@@ -7,7 +7,7 @@ public class CardTest extends TestCase {
     public void testIsHigherThan() {
         //Arrange
         Card card1 = new Card("hearts",2);
-        Card card2 = new Card("hearts",);
+        Card card2 = new Card("hearts",5);
 
         //Act
 
