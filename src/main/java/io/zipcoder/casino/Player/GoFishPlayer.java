@@ -28,4 +28,8 @@ public class GoFishPlayer extends Player{
         return numBooks;
     }
 
+    public ArrayList<Card> getPlayerHand(){
+        return playerHand;
+    }
+
 }

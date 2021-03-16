@@ -12,13 +12,12 @@ public class CardGame {
     ArrayList<Card> deck = new ArrayList<Card>();
     ArrayList<Card> currentHand = new ArrayList<Card>();
 
-
-    public void dealCards(ArrayList<Card> deck) {
-        int counter = 0;
-
-    }
     public CardGame(){
         generateDeck();
+    }
+
+    public void dealCards() {
+        int counter = 0;
     }
 
     public void generateDeck(){
