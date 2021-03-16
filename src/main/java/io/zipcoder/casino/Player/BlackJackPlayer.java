@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class BlackJackPlayer extends GamblingPlayer{
     Integer playerScore;
-    ArrayList<Card> playerHand = new ArrayList<Card>();
+    //ArrayList<Card> playerHand = new ArrayList<Card>();
 
     public BlackJackPlayer(String playerName, Double playerBalance){
         super(playerName,playerBalance);
