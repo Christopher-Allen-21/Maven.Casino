@@ -45,7 +45,7 @@ public class CasinoEngine {
         System.out.print("Entering BlackJack\n\n");
         //May cause issues return player to main screen
         BlackJackPlayer blackJackPlayer = (BlackJackPlayer) currentPlayer;
-        BlackJack blackJack = new BlackJack();
+        BlackJack blackJack = new BlackJack(blackJackPlayer);
     }
 
     public void runGoFish(Player currentPlayer){

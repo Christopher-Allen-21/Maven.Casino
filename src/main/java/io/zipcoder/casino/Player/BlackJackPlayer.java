@@ -12,6 +12,8 @@ public class BlackJackPlayer extends GamblingPlayer{
     }
 
     public void decideToHitOrStay(){
+        public void getTotals(){
 
+        }
     }
 }

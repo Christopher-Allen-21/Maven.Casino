@@ -13,6 +13,7 @@ public class CardGame {
     ArrayList<Card> currentHand = new ArrayList<Card>();
 
 
+
     public void dealCards(ArrayList<Card> deck) {
         int counter = 0;
 
