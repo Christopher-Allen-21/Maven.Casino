@@ -1,7 +1,10 @@
 package io.zipcoder.casino.CardGame;
+import io.zipcoder.casino.Card;
+import java.util.ArrayList;
 
-public class GoFishGame {
-    private ArrayLsit<Card> cardStack = new ArrayList<Card>();
+
+public class GoFishGame extends CardGame {
+    private ArrayList<Card> cardStack = new ArrayList<Card>();
 
     public GoFishGame(){}
 
