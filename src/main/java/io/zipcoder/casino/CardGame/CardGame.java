@@ -6,5 +6,8 @@ public class CardGame {
     //private ArrayList<Card> deck = new ArrayList<Card>();
 
     public void shuffleDeck(){}
+    public void addCard(){
+
+    }
     public void dealCards(){}
 }
