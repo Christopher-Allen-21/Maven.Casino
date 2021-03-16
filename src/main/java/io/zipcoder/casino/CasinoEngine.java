@@ -53,6 +53,7 @@ public class CasinoEngine {
         //May cause issues return player to main screen
         GoFishPlayer goFishPlayer = (GoFishPlayer) currentPlayer;
         GoFishGame goFish = new GoFishGame();
+        //goFish.startGame();
     }
 
     public void runCraps(Player currentPlayer){

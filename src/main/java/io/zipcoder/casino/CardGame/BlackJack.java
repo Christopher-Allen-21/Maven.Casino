@@ -29,6 +29,7 @@ public class BlackJack<Cards> extends CardGame implements GamblingGameInterface 
     }
 
 
+
     private ArrayList<Card> playerHand = new ArrayList<Card>(0);
     private ArrayList<Card> dealerHand = new ArrayList<Card>(0);
     public void setStartingPlayerHand (){
@@ -74,6 +75,10 @@ public class BlackJack<Cards> extends CardGame implements GamblingGameInterface 
         return null;
     }
     public void aceCheck(){
+
+    public void askHitOrStay(){}
+    public void compareTotals(){}
+
 
     }
     public void getTotals(){}
