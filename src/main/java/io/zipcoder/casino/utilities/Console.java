@@ -1,8 +1,11 @@
 package io.zipcoder.casino.utilities;
 
 
+import io.zipcoder.casino.Card;
+
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -29,6 +32,66 @@ public final class Console {
         println(prompt, args);
         return input.nextLine();
     }
+
+    public Integer getCardInput(String prompt, Object... args) {
+        while(true) {
+            println(prompt, args);
+            String userInput = input.nextLine();
+            if(userInput.equals("2")){
+                return 2;
+            }
+            else if(userInput.equals("3")){
+                return 3;
+            }
+            else if(userInput.equals("4")){
+                return 4;
+            }
+            else if(userInput.equals("5")){
+                return 5;
+            }
+            else if(userInput.equals("6")){
+                return 6;
+            }
+            else if(userInput.equals("7")){
+                return 7;
+            }
+            else if(userInput.equals("8")){
+                return 8;
+            }
+            else if(userInput.equals("9")){
+                return 9;
+            }
+            else if(userInput.equals("10")){
+                return 10;
+            }
+            else if(userInput.equalsIgnoreCase("jack")){
+                return 11;
+            }
+            else if(userInput.equalsIgnoreCase("queen")){
+                return 12;
+            }
+            else if(userInput.equalsIgnoreCase("king")){
+                return 13;
+            }
+            else if(userInput.equalsIgnoreCase("ace")){
+                return 14;
+            }
+            else {
+                getCardInput("Please enter a card");
+            }
+        }
+    }
+
+    public void displayHandAndBooks(ArrayList<Card> hand, Integer numOfBooks){
+        System.out.println("Number of Books: "+numOfBooks);
+        System.out.println("Current Hand:");
+        for(int i=0;i<hand.size();i++){
+            System.out.println(" "+hand.get(i));
+        }
+        System.out.print("\n");
+
+    }
+
 
     public Double getDoubleInput(String prompt, Object... args) {
         String stringInput = getStringInput(prompt, args);

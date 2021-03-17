@@ -43,31 +43,25 @@ public class CasinoEngine {
 
     public void runBlackJackGame(Player currentPlayer){
         System.out.print("Entering BlackJack\n\n");
-        //May cause issues return player to main screen
-        BlackJackPlayer blackJackPlayer = (BlackJackPlayer) currentPlayer;
-        BlackJack blackJack = new BlackJack();
+        BlackJack blackJack = new BlackJack(currentPlayer);
+        blackJack.startGame();
+
     }
 
     public void runGoFish(Player currentPlayer){
         System.out.print("Entering Go Fish\n\n");
-        //May cause issues return player to main screen
-        GoFishPlayer goFishPlayer = (GoFishPlayer) currentPlayer;
-        GoFishGame goFish = new GoFishGame();
-        //goFish.startGame();
+        GoFishGame goFish = new GoFishGame(currentPlayer);
+        goFish.startGame();
     }
 
     public void runCraps(Player currentPlayer){
         System.out.print("Entering Craps\n\n");
-        //May cause issues return player to main screen
-        CrapsPlayer crapsPlayer = (CrapsPlayer) currentPlayer;
-        CrapsGame craps = new CrapsGame();
+        CrapsGame craps = new CrapsGame(currentPlayer);
     }
 
     public void runChoHan(Player currentPlayer){
         System.out.print("Entering Cho Han\n\n");
-        //May cause issues return player to main screen
-        ChoHanPlayer choHanPlayer = (ChoHanPlayer) currentPlayer;
-        ChoHanGame choHan = new ChoHanGame();
+        ChoHanGame choHan = new ChoHanGame(currentPlayer);
     }
 
 

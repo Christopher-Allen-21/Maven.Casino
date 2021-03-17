@@ -10,15 +10,21 @@ public class CardGame {
     public final int CARDS_IN_DECK = 52;
     public final int CARDS_IN_SUIT = 13;
     ArrayList<Card> deck = new ArrayList<Card>();
-    ArrayList<Card> currentHand = new ArrayList<Card>();
+
+
 
 
     public void dealCards(ArrayList<Card> deck) {
         int counter = 0;
 
     }
+
     public CardGame(){
         generateDeck();
+    }
+
+    public void dealCards() {
+        int counter = 0;
     }
 
     public void generateDeck(){
