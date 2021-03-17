@@ -7,6 +7,14 @@ public class Card implements Comparable<Card>{
     int value;
     String faceCard;
 
+    public Card(String suit, int value) {
+        this.suit = suit;
+        this.value = value;
+        color = assignColor();
+        faceCard = createFaceCard();
+
+    }
+
     @Override
     public int compareTo(Card card){
         if(this.value==card.getValue()){
@@ -18,14 +26,6 @@ public class Card implements Comparable<Card>{
         else{
             return -1;
         }
-    }
-
-    public Card(String suit, int value) {
-        this.suit = suit;
-        this.value = value;
-        color = assignColor();
-        faceCard = createFaceCard();
-
     }
 
     public boolean isHigherThan(Card otherCard) {
