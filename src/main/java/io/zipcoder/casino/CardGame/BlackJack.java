@@ -8,7 +8,7 @@ import io.zipcoder.casino.utilities.Console;
 import java.util.ArrayList;
 
 
-public class BlackJack<Cards> extends CardGame implements GamblingGameInterface {
+public class BlackJack extends CardGame implements GamblingGameInterface {
     Console myConsole;
 
     Player player1;

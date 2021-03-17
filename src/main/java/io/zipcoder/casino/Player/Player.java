@@ -8,7 +8,7 @@ public class Player {
     String playerName;
     Integer numBooks=0;
     Integer handTotal=0;
-    ArrayList<Card> playerHand = new ArrayList<Card>();
+    ArrayList<Card> hand = new ArrayList<Card>();
 
     public Player(String playerName){
         this.playerName = playerName;
@@ -24,9 +24,10 @@ public class Player {
         this.playerName = playerName;
     }
 
-    public ArrayList<Card> getPlayerHand(){
-        return playerHand;
+    public ArrayList<Card> getHand(){
+        return hand;
     }
+    public void setHand(ArrayList<Card> hand){this.hand = hand;}
 
     public Integer getNumBooks(){ return numBooks; }
     public void incrementNumBooks(Integer amountToAdd){numBooks+=amountToAdd;}
