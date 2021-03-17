@@ -62,6 +62,7 @@ public class CasinoEngine {
     public void runChoHan(Player currentPlayer){
         System.out.print("Entering Cho Han\n\n");
         ChoHanGame choHan = new ChoHanGame(currentPlayer);
+        choHan.startGame();
     }
 
 
