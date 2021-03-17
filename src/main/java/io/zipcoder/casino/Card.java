@@ -1,6 +1,6 @@
 package io.zipcoder.casino;
 
-public class Card {
+public class Card implements Comparable<Card>{
 
     String suit;
     String color;
@@ -15,6 +15,18 @@ public class Card {
 
     }
 
+    @Override
+    public int compareTo(Card card){
+        if(this.value==card.getValue()){
+            return 0;
+        }
+        else if(this.value>card.getValue()){
+            return 1;
+        }
+        else{
+            return -1;
+        }
+    }
 
     public boolean isHigherThan(Card otherCard) {
         if(this.value>otherCard.value){
