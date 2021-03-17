@@ -10,7 +10,7 @@ import java.util.Collections;
 
 
 public class BlackJack extends CardGame implements GamblingGameInterface {
-    Console myConsole;
+    private Console console = new Console(System.in,System.out);
     int deckIndex = 0;
     Player player1;
     Player dealer1 = new Player("Nobles");
@@ -27,25 +27,23 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
         while(true) {
             Collections.shuffle(deck);
             dealCards();
-            checkPlayerHand();
-            //setStartingDealerHand();
-            askHitOrStay();
-            //getTotals();
             compareTotals();
+            console.checkPlayerHand(player1,player1.getHand(), player1.getHandTotal());
+            console.askHitOrStay();
             checkWinner();
         }
     }
 
 
 
-    private ArrayList<Card> playerHand = new ArrayList<Card>(0);
-    private ArrayList<Card> dealerHand = new ArrayList<Card>(0);
-    public void checkPlayerHand (){
-        for(int i = 0; i < playerHand.size(); i++ ){
-            System.out.println(playerHand.indexOf(i));
-        }
-        System.out.println(player1.getHandTotal());
-    }
+//    private ArrayList<Card> playerHand = new ArrayList<Card>(0);
+//    private ArrayList<Card> dealerHand = new ArrayList<Card>(0);
+//    public void checkPlayerHand (){
+//        for(int i = 0; i < playerHand.size(); i++ ){
+//           System.out.println(playerHand.indexOf(i));
+//        }
+//        System.out.println(player1.getHandTotal());
+//    }
 
 //    public void checkDealerHand (){
 //        do {
@@ -56,37 +54,37 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
 
     public ArrayList<Card> setPlayerHand (Card card){
 
-        if (askHitOrStay() == "hit") {
-            playerHand.add(card);
+        if (console.askHitOrStay() == "hit") {
+            player1.getHand().add(card);
         }
-        else if(askHitOrStay() == "stay") {
-            return playerHand;
+        else if(console.askHitOrStay() == "stay") {
+            return player1.getHand();
         }
         return null;
     }
 
-    public String askHitOrStay () {
-        String playerChoice = "";
-        boolean redo = true;
-        while (redo) {
-            playerChoice = myConsole.getStringInput("1 - 'Hit', 2 - 'Stay'");
-            switch (playerChoice) {
-                case "1":
-                    redo = false;
-                    return "hit";
-                case "2":
-                    redo = false;
-                    return "stay";
-                default:
-                    System.out.println("Please choose from the menu!");
-            }
-        }
-        return null;
-    }
+//    public String askHitOrStay () {
+//        String playerChoice = "";
+//        boolean redo = true;
+//        while (redo) {
+//            playerChoice = myConsole.getStringInput("1 - 'Hit', 2 - 'Stay'");
+//            switch (playerChoice) {
+//                case "1":
+//                    redo = false;
+//                    return "hit";
+//                case "2":
+//                    redo = false;
+//                    return "stay";
+//                default:
+//                    System.out.println("Please choose from the menu!");
+//            }
+//        }
+//        return null;
+//    }
 
 
     public void aceCheck(Card card){
-        if(playerHand.contains(card.getBlackJackValue() == 11));
+        if(player1.getHand().contains(card.getBlackJackValue() == 11));
         if(player1.getHandTotal() > 22){
             player1.incrementHandTotal(-10);
         }
@@ -95,10 +93,10 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
 
     public void compareTotals () {
         Integer total = 0;
-        for(int i = 0; i < playerHand.size(); i++){
-            total += playerHand.get(i).getValue();
+        for(int i = 0; i < player1.getHand().size(); i++){
+            total += player1.getHand().get(i).getBlackJackValue();
         }
-        player1.incrementHandTotal(total);
+        player1.incrementHandTotal(total); // change to set hand total;
     }
 
     public void playerLosesBet () {

@@ -112,6 +112,8 @@ public final class Console {
     }
 
 
+
+
     public Double getDoubleInput(String prompt, Object... args) {
         String stringInput = getStringInput(prompt, args);
         try {
@@ -138,6 +140,35 @@ public final class Console {
 
     public Integer getIntegerInput(String prompt, Object... args) {
         return getLongInput(prompt, args).intValue();
+    }
+
+    public String askHitOrStay () {
+        String playerChoice = "";
+        boolean redo = true;
+        while (redo) {
+            System.out.println("1 - 'Hit', 2 - 'Stay'");
+            playerChoice = input.nextLine();
+            switch (playerChoice) {
+                case "1":
+                    redo = false;
+                    return "hit";
+                case "2":
+                    redo = false;
+                    return "stay";
+                default:
+                    System.out.println("Please choose from the menu!");
+            }
+        }
+        return null;
+    }
+
+    public void checkPlayerHand (Player player1, ArrayList<Card> playerHand, Integer total){
+        System.out.println(player1);
+        System.out.println("Current hand: ");
+        for(int i = 0; i < playerHand.size(); i++ ){
+            System.out.println(playerHand.get(i));
+        }
+        System.out.println("Current total: " + total);
     }
 }
 
