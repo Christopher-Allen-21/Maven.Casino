@@ -2,6 +2,8 @@ package io.zipcoder.casino.CardGame;
 import io.zipcoder.casino.Card;
 import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
+
+import java.util.ArrayList;
 import java.util.Collections;
 
 // Deal 9 cards to player and ai
@@ -75,13 +77,23 @@ public class GoFishGame extends CardGame {
             deckIndex = 0;
             Collections.shuffle(deck);
             dealCards();
-            myConsole.displayHandAndBooks(currentPlayer.getHand(),currentPlayer.getNumBooks());
+            myConsole.displayHandAndBooks(deckIndex,currentPlayer.getName(),currentPlayer.getHand(),currentPlayer.getNumBooks());
+            myConsole.displayHandAndBooks(deckIndex,aiPlayer.getName(),aiPlayer.getHand(),aiPlayer.getNumBooks());
             if(checkHandForBooks(currentPlayer)){
-               removeBook(currentPlayer,getIndexOfBook(currentPlayer));
+                removeBookAndIncrementNumBooks(currentPlayer,getIndexOfBook(currentPlayer));
+                myConsole.displayHandAndBooks(deckIndex,currentPlayer.getName(),currentPlayer.getHand(),currentPlayer.getNumBooks());
             }
+            if(checkHandForBooks(aiPlayer)){
+                removeBookAndIncrementNumBooks(aiPlayer,getIndexOfBook(aiPlayer));
+                myConsole.displayHandAndBooks(deckIndex,currentPlayer.getName(),currentPlayer.getHand(),currentPlayer.getNumBooks());
+            }
+            playerAskForCards();
+            myConsole.displayHandAndBooks(deckIndex,currentPlayer.getName(),currentPlayer.getHand(),currentPlayer.getNumBooks());
+            myConsole.displayHandAndBooks(deckIndex,aiPlayer.getName(),aiPlayer.getHand(),aiPlayer.getNumBooks());
 
-
-
+            if(myConsole.displayPlayAgain("Go Fish")){
+                break;
+            }
 
         }
     }
@@ -107,37 +119,49 @@ public class GoFishGame extends CardGame {
         return indexOfBook;
     }
 
-    public void removeBook(Player player, int indexOfBook){
+    public void removeBookAndIncrementNumBooks(Player player, int indexOfBook){
         int valueAtIndex = player.getHand().get(indexOfBook).getValue();
         for(int i=0;i<player.getHand().size();i++){
-
+            if(valueAtIndex == player.getHand().get(i).getValue()){
+                player.getHand().remove(i);
+            }
         }
+        currentPlayer.incrementNumBooks(1);
     }
 
     @Override
     public void dealCards(){
-        for(int i=0;i<9;i++){
+        for(int i=0;i<2;i++){
             currentPlayer.getHand().add(deck.get(deckIndex));
             deckIndex++;
 
         }
-        for(int i=0;i<9;i++){
+        for(int i=0;i<2;i++){
             aiPlayer.getHand().add(deck.get(deckIndex));
             deckIndex++;
         }
     }
 
     public void playerAskForCards(){
-        myConsole.displayHandAndBooks(currentPlayer.getHand(),currentPlayer.getNumBooks());
-        Integer cardPicked = myConsole.getCardInput("Ask opposing player for a card:",currentPlayer.getHand().toArray());
+        Integer cardPicked = myConsole.getCardInput("Enter a card to ask for:");
         if(checkAIHand(cardPicked)){
-
+            transferCardFromAIToPlayer(cardPicked);
         }
 
     }
 
     public void aiAskForCards(){
 
+    }
+
+    public void transferCardFromAIToPlayer(Integer cardValue){
+        for(int i=0;i<aiPlayer.getHand().size();i++){
+            if(cardValue == aiPlayer.getHand().get(i).getValue()){
+                currentPlayer.getHand().add(aiPlayer.getHand().get(i));
+                aiPlayer.getHand().remove(i);
+                //TRY TO SORT HANDS FOR DEBUGGING
+            }
+        }
     }
 
     public boolean checkAIHand(Integer cardValue){

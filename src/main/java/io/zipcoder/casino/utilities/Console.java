@@ -2,6 +2,7 @@ package io.zipcoder.casino.utilities;
 
 
 import io.zipcoder.casino.Card;
+import io.zipcoder.casino.Player.Player;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -82,14 +83,33 @@ public final class Console {
         }
     }
 
-    public void displayHandAndBooks(ArrayList<Card> hand, Integer numOfBooks){
+    public void displayHandAndBooks(int index, String playerName, ArrayList<Card> hand, Integer numOfBooks){
+        System.out.println("Deck Index: "+index);
+        System.out.println("Player: "+playerName);
         System.out.println("Number of Books: "+numOfBooks);
         System.out.println("Current Hand:");
         for(int i=0;i<hand.size();i++){
-            System.out.println(" "+hand.get(i));
+            System.out.println(" "+hand.get(i)+" - "+hand.get(i).getValue());
         }
         System.out.print("\n");
+    }
 
+    public Boolean displayPlayAgain(String gameName){
+        boolean playAgain;
+        while(true) {
+            System.out.println("Would you like to play " + gameName + " again?");
+            String userInput = input.nextLine();
+            if(userInput.equalsIgnoreCase("yes")){
+                playAgain = true;
+            }
+            else if(userInput.equalsIgnoreCase("no")){
+                playAgain = false;
+            }
+            else{
+                displayPlayAgain(gameName);
+            }
+        }
+        return playAgain;
     }
 
 
