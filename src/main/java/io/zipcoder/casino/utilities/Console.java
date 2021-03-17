@@ -15,6 +15,7 @@ import java.util.Scanner;
 public final class Console {
     private final Scanner input;
     private final PrintStream output;
+    boolean redo = true;
 
     public Console(InputStream in, PrintStream out) {
         this.input = new Scanner(in);
@@ -144,7 +145,7 @@ public final class Console {
 
     public String askHitOrStay () {
         String playerChoice = "";
-        boolean redo = true;
+
         while (redo) {
             System.out.println("1 - 'Hit', 2 - 'Stay'");
             playerChoice = input.nextLine();
@@ -159,7 +160,7 @@ public final class Console {
                     System.out.println("Please choose from the menu!");
             }
         }
-        return null;
+       return null;
     }
 
     public void checkPlayerHand (Player player1, ArrayList<Card> playerHand, Integer total){
@@ -168,7 +169,7 @@ public final class Console {
         for(int i = 0; i < playerHand.size(); i++ ){
             System.out.println(playerHand.get(i));
         }
-        System.out.println("Current total: " + total);
+        System.out.println("Current total: " + total + "\n");
     }
 }
 
