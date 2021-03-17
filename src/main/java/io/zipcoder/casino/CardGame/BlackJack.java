@@ -80,8 +80,13 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
         }
         return null;
     }
+
+
     public void aceCheck(Card card){
         if(playerHand.contains(card.getBlackJackValue() == 11));
+        if(player1.getHandTotal() > 22){
+            player1.incrementHandTotal(-10);
+        }
     }
 
 
@@ -94,7 +99,27 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
     }
     public void playerHasNoMoney () {
     }
+
+
     public void checkWinner () {
+        if((player1.getHandTotal() > dealer1.getHandTotal())   && player1.getHandTotal() < 22) {
+            System.out.println(player1 + " Wins");
+        }
+        else if(player1.getHandTotal() < 22 && dealer1.getHandTotal() > 21){
+            System.out.println(player1 + " Wins");
+        }
+
+        else if((dealer1.getHandTotal() > player1.getHandTotal())   && dealer1.getHandTotal() < 22) {
+            System.out.println(dealer1 + " Wins");
+        }
+        else if(dealer1.getHandTotal() < 22 && player1.getHandTotal() > 21){
+            System.out.println(dealer1 + " Wins");
+        }
+        else if((player1.getHandTotal() == dealer1.getHandTotal()) ||
+                (player1.getHandTotal() > 21 && dealer1.getHandTotal() > 21) ){
+            System.out.println("Push");
+        }
     }
+
 }
 
