@@ -2,7 +2,12 @@ package io.zipcoder.casino.CardGame;
 
 import io.zipcoder.casino.Card;
 import io.zipcoder.casino.GameInterface.GamblingGameInterface;
+<<<<<<< HEAD
 import io.zipcoder.casino.Player.Player;
+=======
+import io.zipcoder.casino.Player.BlackJackPlayer;
+import io.zipcoder.casino.Player.BlackJackPlayerDealer;
+>>>>>>> 040d87f8655285168f5f6d77d38902f422b967e2
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
@@ -10,20 +15,31 @@ import java.util.ArrayList;
 
 public class BlackJack<Cards> extends CardGame implements GamblingGameInterface {
     Console myConsole;
+<<<<<<< HEAD
 
 
     public BlackJack(Player player1) {
+=======
+    BlackJackPlayer player1;
+    BlackJackPlayerDealer dealer1 = new BlackJackPlayerDealer("Nobles",100.0);
+    BlackJackPlayerDealer dealer2 = new BlackJackPlayerDealer("Dolio",100.0);
+    BlackJackPlayerDealer dealer3 = new BlackJackPlayerDealer("Younger",100.0);
+
+    public BlackJack(BlackJackPlayer player1) {
+        super();
+        this.player1 = player1;
+>>>>>>> 040d87f8655285168f5f6d77d38902f422b967e2
         myConsole = new Console(System.in, System.out);
     }
 
 
     public void startGame() {
         while(true) {
+
             setStartingPlayerHand();
             setStartingDealerHand();
             askHitOrStay();
-            getTotals();
-            aceCheck();
+            //getTotals();
             compareTotals();
             checkWinner();
         }
@@ -75,14 +91,19 @@ public class BlackJack<Cards> extends CardGame implements GamblingGameInterface 
         }
         return null;
     }
-    public void aceCheck(){
+    public void aceCheck(Card card){
+        if(playerHand.contains(card.getBlackJackValue() == 11));
 
+<<<<<<< HEAD
     //public void askHitOrStay(){}
     //public void compareTotals(){}
+=======
+>>>>>>> 040d87f8655285168f5f6d77d38902f422b967e2
 
 
     }
-    public void getTotals(){}
+
+
     public void compareTotals () {
     }
 
