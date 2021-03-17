@@ -101,12 +101,11 @@ public final class Console {
             String userInput = input.nextLine();
             if(userInput.equalsIgnoreCase("yes")){
                 playAgain = true;
+                break;
             }
             else if(userInput.equalsIgnoreCase("no")){
                 playAgain = false;
-            }
-            else{
-                displayPlayAgain(gameName);
+                break;
             }
         }
         return playAgain;
