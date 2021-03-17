@@ -31,7 +31,6 @@ public final class Console {
     }
 
     public String getCardInput(String prompt, Object... args) {
-
         while(true) {
             println(prompt, args);
             String userInput = input.nextLine();
@@ -47,9 +46,6 @@ public final class Console {
         }
     }
 
-    public void displayHand(){
-
-    }
 
     public Double getDoubleInput(String prompt, Object... args) {
         String stringInput = getStringInput(prompt, args);
