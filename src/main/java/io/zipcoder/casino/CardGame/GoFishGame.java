@@ -79,18 +79,13 @@ public class GoFishGame extends CardGame {
         while(true){
             resetGame();
             dealCards();
-            myConsole.displayHandAndBooks(deckIndex,currentPlayer.getName(),currentPlayer.getHand(),currentPlayer.getNumBooks());
-            myConsole.displayHandAndBooks(deckIndex,aiPlayer.getName(),aiPlayer.getHand(),aiPlayer.getNumBooks());
+            displayHands();
             checkForBooks();
             while(deckIndex<51){
                 while(playerAskForCards()){
-                    myConsole.displayHandAndBooks(deckIndex,currentPlayer.getName(),currentPlayer.getHand(),currentPlayer.getNumBooks());
-                    myConsole.displayHandAndBooks(deckIndex,aiPlayer.getName(),aiPlayer.getHand(),aiPlayer.getNumBooks());
                     checkForBooks();
                 }
                 while(aiAskForCards()){
-                    myConsole.displayHandAndBooks(deckIndex,currentPlayer.getName(),currentPlayer.getHand(),currentPlayer.getNumBooks());
-                    myConsole.displayHandAndBooks(deckIndex,aiPlayer.getName(),aiPlayer.getHand(),aiPlayer.getNumBooks());
                     checkForBooks();
                 }
             }
@@ -123,6 +118,11 @@ public class GoFishGame extends CardGame {
         }
     }
 
+    public void displayHands(){
+        myConsole.displayHandAndBooks(deckIndex,currentPlayer.getName(),currentPlayer.getHand(),currentPlayer.getNumBooks());
+        myConsole.displayHandAndBooks(deckIndex,aiPlayer.getName(),aiPlayer.getHand(),aiPlayer.getNumBooks());
+    }
+
     public void checkForBooks(){
         if(checkHandForBooks(currentPlayer)){
             removeBookAndIncrementNumBooks(currentPlayer,getValueOfBook(currentPlayer));
@@ -137,6 +137,8 @@ public class GoFishGame extends CardGame {
     }
 
     public boolean checkHandForBooks(Player player) {
+
+        //Collections.frequency(player.getHand(),player.getHand().stream().filter(p -> p.getValue()));
         return false;
 
     }
@@ -171,11 +173,13 @@ public class GoFishGame extends CardGame {
         if(checkHand(aiPlayer,cardPicked)){ //checking AI hand for player card picked
             myConsole.println("Correct!\nPlayer Taking AI Card\n");
             transferCard(aiPlayer,currentPlayer,getValueOfMatch(aiPlayer,cardPicked));//ai player transferring cards to current player
+            displayHands();
             return true;
         }
         else{
             myConsole.println("Incorrect! Go Fish!\nPlayer drawing from deck\n");
             takeCardFromDeck(currentPlayer);
+            displayHands();
             return false;
         }
     }
@@ -183,18 +187,26 @@ public class GoFishGame extends CardGame {
     public boolean aiAskForCards(){
         Random random  = new Random();
         Integer aiCardPicked = 2 + random.nextInt(14-2+1);
-        myConsole.println("AI asked for "+aiCardPicked);
 
-        if(checkHand(currentPlayer, aiCardPicked)){ //checking current player hand for ai card picked
-            transferCard(currentPlayer, aiPlayer,getValueOfMatch(currentPlayer,aiCardPicked)); //current player transferring cards to aiPlayer
-            myConsole.println("AI Taking Player Card\n");
-            return true;
+        String playerInput = myConsole.getStringInput("AI's turn\nPress any button to continue\n");
+
+        if(playerInput != null){
+            myConsole.println("AI asked for "+aiCardPicked);
+
+            if(checkHand(currentPlayer, aiCardPicked)){ //checking current player hand for ai card picked
+                transferCard(currentPlayer, aiPlayer,getValueOfMatch(currentPlayer,aiCardPicked)); //current player transferring cards to aiPlayer
+                myConsole.println("AI Taking Player Card\n");
+                displayHands();
+                return true;
+            }
+            else{
+                myConsole.println("AI Drawing From Deck\n");
+                takeCardFromDeck(aiPlayer);
+                displayHands();
+                return false;
+            }
         }
-        else{
-            myConsole.println("AI Drawing From Deck\n");
-            takeCardFromDeck(aiPlayer);
-            return false;
-        }
+        return false;
     }
 
     public boolean checkHand(Player player, Integer cardValue){
