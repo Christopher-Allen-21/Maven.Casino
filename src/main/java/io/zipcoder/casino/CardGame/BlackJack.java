@@ -2,6 +2,7 @@ package io.zipcoder.casino.CardGame;
 
 import io.zipcoder.casino.Card;
 import io.zipcoder.casino.GameInterface.GamblingGameInterface;
+import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class BlackJack<Cards> extends CardGame implements GamblingGameInterface 
     Console myConsole;
 
 
-    public BlackJack() {
+    public BlackJack(Player player1) {
         myConsole = new Console(System.in, System.out);
     }
 
@@ -34,13 +35,13 @@ public class BlackJack<Cards> extends CardGame implements GamblingGameInterface 
     private ArrayList<Card> dealerHand = new ArrayList<Card>(0);
     public void setStartingPlayerHand (){
         do {
-            playerHand.add();
+            //playerHand.add();
         } while (playerHand.size() != 2);
     }
 
     public void setStartingDealerHand (){
         do {
-            dealerHand.add();
+            //dealerHand.add();
         } while (playerHand.size() != 2);
     }
 
@@ -76,8 +77,8 @@ public class BlackJack<Cards> extends CardGame implements GamblingGameInterface 
     }
     public void aceCheck(){
 
-    public void askHitOrStay(){}
-    public void compareTotals(){}
+    //public void askHitOrStay(){}
+    //public void compareTotals(){}
 
 
     }

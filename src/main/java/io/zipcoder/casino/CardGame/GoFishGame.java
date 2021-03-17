@@ -1,19 +1,19 @@
 package io.zipcoder.casino.CardGame;
-import io.zipcoder.casino.Card;
-import io.zipcoder.casino.Player.GoFishPlayer;
+import io.zipcoder.casino.Player.Player;
+import io.zipcoder.casino.utilities.Console;
 
-import java.util.ArrayList;
 import java.util.Collections;
 
 
 public class GoFishGame extends CardGame {
 
-    private GoFishPlayer currentPlayer;
-    private GoFishPlayer aiPlayer;
+    private Console myConsole = new Console(System.in,System.out);
+    private Player currentPlayer;
+    private Player aiPlayer = new Player("Nobles");
     int deckIndex = 0;
 
 
-    public GoFishGame(GoFishPlayer currentPlayer){
+    public GoFishGame(Player currentPlayer){
         super();
         this.currentPlayer = currentPlayer;
     }
@@ -23,6 +23,7 @@ public class GoFishGame extends CardGame {
             deckIndex = 0;
             Collections.shuffle(deck);
             dealCards();
+            askForCards();
 
 
         }
@@ -39,6 +40,13 @@ public class GoFishGame extends CardGame {
             aiPlayer.getPlayerHand().add(deck.get(deckIndex));
             deckIndex++;
         }
+    }
+
+    public void askForCards(){
+
+        String cardPicked = myConsole.getCardInput("Ask opposing player for a card:");
+
+
     }
 
     public void compareNumBooks(){}

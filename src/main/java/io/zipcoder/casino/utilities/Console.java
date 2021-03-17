@@ -30,6 +30,27 @@ public final class Console {
         return input.nextLine();
     }
 
+    public String getCardInput(String prompt, Object... args) {
+
+        while(true) {
+            println(prompt, args);
+            String userInput = input.nextLine();
+            if (userInput.equals("2") || userInput.equals("3") || userInput.equals("4") || userInput.equals("5") ||
+                userInput.equals("6") || userInput.equals("7") || userInput.equals("8") || userInput.equals("9") ||
+                userInput.equals("10") || userInput.equalsIgnoreCase("jack") || userInput.equalsIgnoreCase("queen") ||
+                userInput.equalsIgnoreCase("king") || userInput.equalsIgnoreCase("ace")){
+                return userInput;
+            }
+            else {
+                getCardInput("Please enter a card");
+            }
+        }
+    }
+
+    public void displayHand(){
+
+    }
+
     public Double getDoubleInput(String prompt, Object... args) {
         String stringInput = getStringInput(prompt, args);
         try {
