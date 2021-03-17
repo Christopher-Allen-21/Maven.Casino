@@ -166,31 +166,48 @@ public class GoFishGame extends CardGame {
         Integer cardPicked = myConsole.getCardInput("Enter a card to ask for:");
         myConsole.println("\nPlayer asked for "+cardPicked);
 
-        if(checkHand(aiPlayer,cardPicked)){
+        if(checkHand(aiPlayer,cardPicked)){ //checking AI hand for player card picked
             myConsole.println("Player Taking AI Card\n");
-            transferCardFromAIToPlayer(cardPicked);
+            transferCard(aiPlayer,currentPlayer,getIndexOfMatch(aiPlayer,cardPicked));//ai player transferring cards to current player
         }
         else{
             myConsole.println("Player drawing from deck\n");
             takeCardFromDeck(currentPlayer);
         }
-
     }
 
-    public void transferCardFromAIToPlayer(Integer cardValue){
-        for(int i=0;i<aiPlayer.getHand().size();i++){
-            if(cardValue == aiPlayer.getHand().get(i).getValue()){
-                currentPlayer.getHand().add(aiPlayer.getHand().get(i));
-                aiPlayer.getHand().remove(i);
-            }
+    public void aiAskForCards(){
+        Random random  = new Random();
+        Integer aiCardPicked = 2 + random.nextInt(14-2+1);
+        myConsole.println("AI asked for "+aiCardPicked);
+
+        if(checkHand(currentPlayer, aiCardPicked)){ //checking current player hand for ai card picked
+            transferCard(currentPlayer, aiPlayer,getIndexOfMatch(currentPlayer,aiCardPicked)); //current player transferring cards to aiPlayer
+            myConsole.println("AI Taking Player Card\n");
+        }
+        else{
+            myConsole.println("AI Drawing From Deck\n");
+            takeCardFromDeck(aiPlayer);
         }
     }
 
-    public void transferCardFromPlayerToAi(Integer cardValue){
-        for(int i=0;i<currentPlayer.getHand().size();i++){
-            if(cardValue == currentPlayer.getHand().get(i).getValue()){
-                aiPlayer.getHand().add(currentPlayer.getHand().get(i));
-                currentPlayer.getHand().remove(i);
+    public Integer getIndexOfMatch(Player player,Integer cardPicked){
+        int indexOfMatch = -1;
+        for(int i=0;i<player.getHand().size();i++){
+            if(cardPicked == player.getHand().get(i).getValue()){
+                indexOfMatch=i;
+                break;
+            }
+        }
+        return indexOfMatch;
+    }
+
+    public void transferCard(Player transferringPlayer, Player recievingPlayer, Integer indexOfMatch){
+        int match = transferringPlayer.getHand().get(indexOfMatch).getValue();
+        for(int i=0;i<transferringPlayer.getHand().size();i++){
+            if(match == transferringPlayer.getHand().get(i).getValue()){
+                recievingPlayer.getHand().add(transferringPlayer.getHand().get(i));
+                transferringPlayer.getHand().remove(i);
             }
         }
     }
@@ -200,28 +217,12 @@ public class GoFishGame extends CardGame {
         deckIndex++;
     }
 
-    public void aiAskForCards(){
-        Random random  = new Random();
-        Integer aiCardPicked = 2 + random.nextInt(14-2+1);
-        myConsole.println("AI asked for "+aiCardPicked);
-
-        if(checkHand(currentPlayer, aiCardPicked)){
-            transferCardFromPlayerToAi(aiCardPicked);
-            myConsole.println("AI Taking Player Card\n");
-        }
-        else{
-            myConsole.println("AI Drawing From Deck\n");
-            takeCardFromDeck(aiPlayer);
-        }
-    }
-
-
-
     public boolean checkHand(Player player, Integer cardValue){
         boolean playerHasCard = false;
         for(int i=0;i<player.getHand().size();i++){
             if(cardValue == player.getHand().get(i).getValue()){
                 playerHasCard = true;
+                break;
             }
         }
         return playerHasCard;
