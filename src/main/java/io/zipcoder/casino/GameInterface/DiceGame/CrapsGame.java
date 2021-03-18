@@ -1,7 +1,7 @@
 package io.zipcoder.casino.GameInterface.DiceGame;
 import io.zipcoder.casino.GameInterface.GamblingGameInterface;
-import io.zipcoder.casino.GameInterface.GamblingGameInterface;
 import io.zipcoder.casino.Player.Player;
+import io.zipcoder.casino.utilities.Console;
 
 public class CrapsGame extends DiceGame implements GamblingGameInterface {
 
@@ -59,16 +59,43 @@ public class CrapsGame extends DiceGame implements GamblingGameInterface {
      */
 
     int point;
+    int stageOfGame = 1;
+    Console myConsole = new Console(System.in,System.out);
+    Player player;
 
-    public CrapsGame(Player player1){
-        super();
+    public CrapsGame(Player player){
+        this.player = player;
     }
 
     public void startGame(){
 
+        while(true){
+            resetGame();
+            makeBet(); //Maybe make enums of all bet types? Maybe have player have ArrayList of bets to cycle through?
+
+            if(!myConsole.displayPlayAgain("Craps")){
+                break;
+            }
+        }
+
+
     }
 
 
+    public void resetGame(){
+        stageOfGame = 1;
+    }
+
+    public void makeBet(){
+        int betChoice;
+        if(stageOfGame==1){
+            betChoice = myConsole.stageOneBettingPrompt(stageOfGame);
+        }
+        else if(stageOfGame==2){
+            betChoice = myConsole.stageTwoBettingPrompt(stageOfGame);
+        }
+
+    }
 
 
     public void playerLosesBet() {
