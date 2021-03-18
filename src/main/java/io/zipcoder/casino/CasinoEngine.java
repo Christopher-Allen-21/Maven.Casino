@@ -57,6 +57,7 @@ public class CasinoEngine {
     public void runCraps(Player currentPlayer){
         System.out.print("Entering Craps\n\n");
         CrapsGame craps = new CrapsGame(currentPlayer);
+        craps.startGame();
     }
 
 //    public void runChoHan(Player currentPlayer){

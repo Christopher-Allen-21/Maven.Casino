@@ -1,7 +1,5 @@
 package io.zipcoder.casino.Player;
-
 import io.zipcoder.casino.Card;
-
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,11 +9,11 @@ public class Player {
     Integer numBooks=0;
     Integer handTotal=0;
     ArrayList<Card> hand = new ArrayList<Card>();
+    Double playerBalance;
 
     public Player(String playerName){
         this.playerName = playerName;
     }
-
 
 
 
@@ -27,7 +25,6 @@ public class Player {
     }
 
     public ArrayList<Card> getHand(){
-
         return hand;
     }
     public ArrayList<Card> getSortedHand(){
@@ -44,7 +41,18 @@ public class Player {
     public void incrementHandTotal(Integer amountToAdd){handTotal+=amountToAdd;}
     public void setHandTotal(Integer handTotal){this.handTotal = handTotal;}
 
+    public Double getPlayerBalance(){
+        return playerBalance;
+    }
+    public void setPlayerBalance(Double playerBalance){
+        this.playerBalance = playerBalance;
+    }
 
+    public void placeBet(){ }
+
+    public void cashOut(){ }
+
+    public void collectWinnings(){ }
 
 
 
