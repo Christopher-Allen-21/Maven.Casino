@@ -74,4 +74,26 @@ public class GoFishGameTest extends TestCase {
         //Assert
         Assert.assertEquals(expected, actual);
     }
+
+    public void testCheckHandForBooks2(){
+        //Arrange
+        Player player = new Player("Chris");
+        GoFishGame game = new GoFishGame(player);
+        Card card1 = new Card("Spades",3);
+        Card card2 = new Card("Clubs",3);
+        Card card3 = new Card("Hearts",13);
+        Card card4 = new Card("Diamonds",3);
+        player.getHand().add(card1);
+        player.getHand().add(card2);
+        player.getHand().add(card3);
+        player.getHand().add(card4);
+
+        //Act
+        boolean expected = false;
+        boolean actual = game.checkHandForBooks(player);
+
+
+        //Assert
+        Assert.assertEquals(expected, actual);
+    }
 }

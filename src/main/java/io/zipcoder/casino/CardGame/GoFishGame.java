@@ -35,6 +35,7 @@ public class GoFishGame extends CardGame {
     private Player currentPlayer;
     private Player aiPlayer = new Player("Nobles");
     int deckIndex = 0;
+    int bookTotal = 0;
 
     public GoFishGame(Player currentPlayer){
         super();
@@ -42,46 +43,13 @@ public class GoFishGame extends CardGame {
     }
 
     public void startGame(){
-        /*
-        dealCards()
-        checkPlayerHandForBooks()
-        checkAIHandForBooks()
-        while(deckIndex > NUM_OF_CARDS){
-            do{
-                displayPlayerHand()
-                promptUserForInput()
-                    if(aiHasCard){
-                        transferCardsFromAIToPlayer()
-                        checkPlayerHandForBooks()
-                    }
-                    else{
-                        transferCardFromDeckToPlayer()
-                        deckIndex++
-                        playerGuessIsCorrect = false
-                    }
-            }while(aiGuessIsCorrect)
-            do{
-                 aiGuessCard()
-                 displayAIGuess()
-                 displayPlayerHand()
-                    if(userHasCard){
-                        transferCardsFromPlayerToAI()
-                        checkAIHandForBooks()
-                    }
-                    else{
-                        transferCardFromDeckToAI()
-                        deckIndex++
-                        AIGuessIsCorrect = false
-                    }
-            }while(playerGuessIsCorrect)
-         */
 
         while(true){
             resetGame();
             dealCards();
             displayHands();
             checkForBooks();
-            while(deckIndex<51){
+            while(bookTotal != 13){
                 while(playerAskForCards()){
                     checkForBooks();
                 }
@@ -89,7 +57,7 @@ public class GoFishGame extends CardGame {
                     checkForBooks();
                 }
             }
-
+            checkForWinner();
 
             if(!myConsole.displayPlayAgain("Go Fish")){
                 break;
@@ -98,8 +66,10 @@ public class GoFishGame extends CardGame {
         }
     }
 
+
     public void resetGame(){
         deckIndex = 0;
+        bookTotal = 0;
         currentPlayer.getHand().clear();
         aiPlayer.getHand().clear();
         Collections.shuffle(deck);
@@ -137,20 +107,52 @@ public class GoFishGame extends CardGame {
     }
 
     public boolean checkHandForBooks(Player player) {
+        boolean hasBook = false;
+        HashMap<Integer,Integer> match = new HashMap<>();
 
-        //Collections.frequency(player.getHand(),player.getHand().stream().filter(p -> p.getValue()));
-        return false;
+        for(int i=2;i<=14;i++){
+            match.put(i,0);
+        }
 
+        for(int i=0;i<player.getHand().size();i++){
+            for(Integer j : match.keySet()){
+                if(player.getHand().get(i).getValue()==j){
+                    match.put(j,match.get(j)+1);
+                }
+            }
+        }
+
+        for(Integer i : match.keySet()){
+            if(match.get(i)==4){
+                hasBook = true;
+            }
+        }
+
+        return hasBook;
     }
 
     public Integer getValueOfBook(Player player){
-        int valueOfBook = -1;
+        HashMap<Integer,Integer> match = new HashMap<>();
+        Integer valueOfBook = -1;
+
+        for(int i=2;i<=14;i++){
+            match.put(i,0);
+        }
+
         for(int i=0;i<player.getHand().size();i++){
-            if(Collections.frequency(player.getHand(),i)==4){
-                valueOfBook = player.getHand().get(i).getValue();
-                break;
+            for(Integer j : match.keySet()){
+                if(player.getHand().get(i).getValue()==j){
+                    match.put(j,match.get(j)+1);
+                }
             }
         }
+
+        for(Integer i : match.keySet()){
+            if(match.get(i)==4){
+                valueOfBook = i;
+            }
+        }
+
         return valueOfBook;
     }
 
@@ -164,6 +166,7 @@ public class GoFishGame extends CardGame {
         }
         player.getHand().removeAll(cardsToRemove);
         currentPlayer.incrementNumBooks(1);
+        bookTotal++;
     }
 
     public boolean playerAskForCards(){
@@ -248,14 +251,7 @@ public class GoFishGame extends CardGame {
         deckIndex++;
     }
 
-
-
-    public void compareNumBooks(){}
-    public void passPlayCard(){}
-
-    public void checkWinner() {
-
+    private String checkForWinner() {
+        return null;
     }
-
-
 }
