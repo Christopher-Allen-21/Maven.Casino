@@ -16,8 +16,8 @@ public class GamblingPlayer extends Player{
         this.playerBalance = playerBalance;
     }
 
-    public void placeBet(){
-
+    public void placeBet(double playerWagerAmt){
+        this.playerBalance -= playerWagerAmt;
     }
 
     public void cashOut(){

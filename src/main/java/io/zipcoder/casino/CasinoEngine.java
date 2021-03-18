@@ -12,11 +12,11 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class CasinoEngine {
-    Player currentPlayer;
+    GamblingPlayer currentPlayer;
     Console myConsole;
 
     public CasinoEngine(){
-        currentPlayer = new Player("Player1");
+        currentPlayer = new GamblingPlayer("Player1", 100.0);
         myConsole = new Console(System.in,System.out);
     }
 
@@ -59,7 +59,7 @@ public class CasinoEngine {
         CrapsGame craps = new CrapsGame(currentPlayer);
     }
 
-    public void runChoHan(Player currentPlayer){
+    public void runChoHan(GamblingPlayer currentPlayer){
         System.out.print("Entering Cho Han\n\n");
         ChoHanGame choHan = new ChoHanGame(currentPlayer);
         choHan.startGame();

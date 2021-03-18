@@ -12,10 +12,14 @@ public class DiceTest {
 
         // Act
         Dice testDicePair = new Dice();
-        int diceTotal = testDicePair.getDiceTotal();
+        int diceTotal = 0;
+        for (int i = 0; i < 100; i++) {
+            diceTotal = testDicePair.rollPairDice();
+            System.out.println(testDicePair.rollPairDice());
+        }
 
         // Assert
-        Assert.assertNotEquals(1, diceTotal);
+        Assert.assertTrue(diceTotal > 2 && diceTotal < 13);
 
     }
 

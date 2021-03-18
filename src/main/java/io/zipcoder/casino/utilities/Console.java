@@ -126,7 +126,7 @@ public final class Console {
     public Boolean displayPlayAgain(String gameName){
         boolean playAgain;
         while(true) {
-            System.out.println("Would you like to play " + gameName + " again?");
+            System.out.println("Would you like to play " + gameName + " again?\n\nEnter yes or no");
             String userInput = input.nextLine();
             if(userInput.equalsIgnoreCase("yes")){
                 playAgain = true;
