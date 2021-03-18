@@ -168,5 +168,52 @@ public final class Console {
         }
         System.out.println("Current total: " + total + "\n");
     }
+
+
+    public int stageOneBettingPrompt(int stageOfGame){
+        System.out.println("Stage of Game: "+stageOfGame);
+        while(true) {
+            println("Please enter a number to select a bet:");
+            println("1. Pass Line bet");
+            println("2. Don't Pass Line bet");
+            println("3. Non-Field bet");
+            String userInput = input.nextLine();
+            if(userInput.equals("1")){
+                return 1;
+            }
+            else if(userInput.equals("2")){
+                return 2;
+            }
+            else if(userInput.equals("3")){
+                return 3;
+            }
+        }
+    }
+
+    public int stageTwoBettingPrompt(int stageOfGame) {
+        System.out.println("Stage of Game: " + stageOfGame);
+        while (true) {
+            println("Please enter a number to select a bet:");
+            println("1. Come Line bet");
+            println("2. Don't Come Line bet");
+            println("3. Field bet");
+            println("4. Non-Field bet");
+            println("5. Place bet");
+            String userInput = input.nextLine();
+            if (userInput.equals("1")) {
+                return 1;
+            } else if (userInput.equals("2")) {
+                return 2;
+            } else if (userInput.equals("3")) {
+                return 3;
+            } else if (userInput.equals("4")) {
+                return 4;
+            } else if (userInput.equals("5")) {
+                return 5;
+            }
+        }
+    }
+
+
 }
 
