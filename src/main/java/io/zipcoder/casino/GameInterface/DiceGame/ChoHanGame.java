@@ -23,11 +23,11 @@ public class ChoHanGame implements GameInterface {
     }
 
 
-    /*
-    public void startGame(){
 
-        while(true) {
-            greetPlayer();
+    public void startGame(){
+    do {
+        greetPlayer();
+       } while(true) {
             askEvenOrOdd();
             askWager();
                 placeBet()
@@ -38,13 +38,13 @@ public class ChoHanGame implements GameInterface {
             reportWinLoss();
             setPlayerBalance();
             displaySummary();
-            askPlayAgain();
+            displayPlayAgain(String gameName) // Cho-Han
             quitGame();
                 cashOut();
                 collectWinnings();
 
         }
-    */
+
 
 
     public void greetPlayer() {
@@ -116,22 +116,8 @@ public class ChoHanGame implements GameInterface {
         else {
             System.out.println("Sorry, you lost! Better luck next time.");
             return false;
-
         }
     }
-    public int askPlayAgain() {
-        System.out.println("Would you like to play again?");
-        String playerChoice = myConsole.getStringInput("Enter 1 play again or 2 to exit to the Casino."); // should new variable get declared here? or can reuse playChoice.
-        if (playerChoice.equals("1")) {
-            // start loop of .startGame() over again
-        }
-        else if (playerChoice.equals("2")) {
-            //
-        }
-        else {
-        }   return -1;
-    }
-
 
 
     public void compareTotals () {
@@ -144,7 +130,7 @@ public class ChoHanGame implements GameInterface {
     public void playerHasNoMoney () {
     }
 
-    public void checkWinner() {
+    public void checkWinner() { // use this method instead of getWinLoss()?
 
     }
 
