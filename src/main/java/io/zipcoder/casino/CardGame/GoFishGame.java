@@ -51,13 +51,12 @@ public class GoFishGame extends CardGame {
             while(lessThanThirteenBooks){
                 if(bookTotal==13){ lessThanThirteenBooks=false;}
                 while(playerAskForCards()){
-                    checkForBooks();
                 }
                 if(bookTotal==13){ lessThanThirteenBooks=false;}
                 while(aiAskForCards()){
-                    checkForBooks();
                 }
             }
+
             checkForWinner();
             if(!myConsole.displayPlayAgain("Go Fish")){
                 break;
@@ -177,6 +176,7 @@ public class GoFishGame extends CardGame {
             myConsole.println("Correct!\nPlayer Taking AI Card\n");
             transferCard(aiPlayer,currentPlayer,getValueOfMatch(aiPlayer,cardPicked));//ai player transferring cards to current player
             displayHands();
+            checkForBooks();
             return true;
         }
         else{
@@ -188,6 +188,7 @@ public class GoFishGame extends CardGame {
                 myConsole.println("Incorrect! Go Fish!\n");
             }
             displayHands();
+            checkForBooks();
             return false;
         }
     }
@@ -207,11 +208,11 @@ public class GoFishGame extends CardGame {
                 myConsole.println("AI asked for "+aiCardPicked);
             }
 
-
             if(checkHand(currentPlayer, aiCardPicked)){ //checking current player hand for ai card picked
                 transferCard(currentPlayer, aiPlayer,getValueOfMatch(currentPlayer,aiCardPicked)); //current player transferring cards to aiPlayer
                 myConsole.println("AI Taking Player Card\n");
                 displayHands();
+                checkForBooks();
                 return true;
             }
             else{
@@ -220,6 +221,7 @@ public class GoFishGame extends CardGame {
                     takeCardFromDeck(aiPlayer);
                 }
                 displayHands();
+                checkForBooks();
                 return false;
             }
         }
