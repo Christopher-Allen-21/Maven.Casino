@@ -35,9 +35,38 @@ public final class Console {
         return input.nextLine();
     }
 
-    public Integer getCardInput(String prompt, Object... args) {
+    public Double getDoubleInput(String prompt, Object... args) {
+        String stringInput = getStringInput(prompt, args);
+        try {
+            Double doubleInput = Double.parseDouble(stringInput);
+            return doubleInput;
+        } catch (NumberFormatException nfe) { // TODO - Eliminate recursive nature
+            println("[ %s ] is an invalid user input!", stringInput);
+            println("Try inputting a numeric value!");
+            return getDoubleInput(prompt, args);
+        }
+    }
+
+    public Long getLongInput(String prompt, Object... args) {
+        String stringInput = getStringInput(prompt, args);
+        try {
+            Long longInput = Long.parseLong(stringInput);
+            return longInput;
+        } catch (NumberFormatException nfe) { // TODO - Eliminate recursive nature
+            println("[ %s ] is an invalid user input!", stringInput);
+            println("Try inputting an integer value!");
+            return getLongInput(prompt, args);
+        }
+    }
+
+    public Integer getIntegerInput(String prompt, Object... args) {
+        return getLongInput(prompt, args).intValue();
+    }
+
+    public Integer getCardInput(String prompt) {
+
         while(true) {
-            println(prompt, args);
+            println(prompt);
             String userInput = input.nextLine();
             if(userInput.equals("2")){
                 return 2;
@@ -78,19 +107,18 @@ public final class Console {
             else if(userInput.equalsIgnoreCase("ace")){
                 return 14;
             }
-            else {
-                getCardInput("Please enter a card");
-            }
         }
     }
 
-    public void displayHandAndBooks(int index, String playerName, ArrayList<Card> hand, Integer numOfBooks){
+    public void displayHandAndBooks(int index, String playerName, ArrayList<Card> hand, Integer playerNumBooks, Integer aiNumBooks,Integer bookTotal){
+        System.out.println("Book Total: "+bookTotal);
         System.out.println("Deck Index: "+index);
+        System.out.println("AI Number of Books: "+aiNumBooks+"\n");
         System.out.println("Player: "+playerName);
-        System.out.println("Number of Books: "+numOfBooks);
+        System.out.println("Number of Books: "+playerNumBooks);
         System.out.println("Current Hand:");
         for(int i=0;i<hand.size();i++){
-            System.out.println(" "+hand.get(i)+" - "+hand.get(i).getValue());
+            System.out.println(" "+hand.get(i));
         }
         System.out.print("\n");
     }
@@ -112,40 +140,9 @@ public final class Console {
         return playAgain;
     }
 
-
-
-
-    public Double getDoubleInput(String prompt, Object... args) {
-        String stringInput = getStringInput(prompt, args);
-        try {
-            Double doubleInput = Double.parseDouble(stringInput);
-            return doubleInput;
-        } catch (NumberFormatException nfe) { // TODO - Eliminate recursive nature
-            println("[ %s ] is an invalid user input!", stringInput);
-            println("Try inputting a numeric value!");
-            return getDoubleInput(prompt, args);
-        }
-    }
-
-    public Long getLongInput(String prompt, Object... args) {
-        String stringInput = getStringInput(prompt, args);
-        try {
-            Long longInput = Long.parseLong(stringInput);
-            return longInput;
-        } catch (NumberFormatException nfe) { // TODO - Eliminate recursive nature
-            println("[ %s ] is an invalid user input!", stringInput);
-            println("Try inputting an integer value!");
-            return getLongInput(prompt, args);
-        }
-    }
-
-    public Integer getIntegerInput(String prompt, Object... args) {
-        return getLongInput(prompt, args).intValue();
-    }
-
     public String askHitOrStay () {
         String playerChoice = "";
-
+        redo = true;
         while (redo) {
             System.out.println("1 - 'Hit', 2 - 'Stay'");
             playerChoice = input.nextLine();
