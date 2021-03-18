@@ -1,13 +1,9 @@
 package io.zipcoder.casino.GameInterface.DiceGame;
 
 import io.zipcoder.casino.Dice;
-import io.zipcoder.casino.GameInterface.GamblingGameInterface;
 import io.zipcoder.casino.GameInterface.GameInterface;
-import io.zipcoder.casino.Player.GamblingPlayer;
 import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
-
-import static jdk.nashorn.internal.objects.Global.println;
 
 public class ChoHanGame implements GameInterface {
 
@@ -16,7 +12,7 @@ public class ChoHanGame implements GameInterface {
 
     private Console myConsole = new Console(System.in, System.out);
 
-    private GamblingPlayer player1;
+    private Player player1;
     private int rollValue;
     private double playerBet = 0.0;
     private String playerChoice;  // even or odd
@@ -24,7 +20,7 @@ public class ChoHanGame implements GameInterface {
 
     private Dice playerDice = new Dice();
 
-    public ChoHanGame(GamblingPlayer player1) {
+    public ChoHanGame(Player player1) {
         this.player1 = player1;
     }
 

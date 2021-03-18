@@ -11,14 +11,14 @@ public class Player {
     ArrayList<Card> hand = new ArrayList<Card>();
     Double playerBalance;
 
-    public Player(String playerName){
+    public Player(String playerName, Double playerBalance){
         this.playerName = playerName;
+        this.playerBalance = playerBalance;
     }
 
 
 
-    public String getName(){
-        return playerName;
+    public String getName(){ return playerName;
     }
     public void setName(String playerName){
         this.playerName = playerName;
@@ -44,11 +44,14 @@ public class Player {
     public Double getPlayerBalance(){
         return playerBalance;
     }
+
     public void setPlayerBalance(Double playerBalance){
         this.playerBalance = playerBalance;
     }
 
-    public void placeBet(){ }
+    public void placeBet(Double playerBalance){
+        this.playerBalance -= playerBalance;
+    }
 
     public void cashOut(){ }
 

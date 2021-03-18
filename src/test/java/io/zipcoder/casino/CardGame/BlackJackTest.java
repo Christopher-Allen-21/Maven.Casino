@@ -10,7 +10,7 @@ import java.io.Console;
 import java.io.InputStream;
 
 public class BlackJackTest {
-    Player p1 = new Player("Jorge");
+    Player p1 = new Player("Jorge", 100.0);
     BlackJack newGame = new BlackJack(p1);
     Console console;
 
