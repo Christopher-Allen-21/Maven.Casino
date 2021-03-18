@@ -145,7 +145,7 @@ public final class Console {
 
     public String askHitOrStay () {
         String playerChoice = "";
-
+        redo = true;
         while (redo) {
             System.out.println("1 - 'Hit', 2 - 'Stay'");
             playerChoice = input.nextLine();

@@ -56,6 +56,7 @@ public class GoFishGame extends CardGame {
                     checkForBooks();
                 }
             }
+
             checkForWinner();
 
             if(!myConsole.displayPlayAgain("Go Fish")){
