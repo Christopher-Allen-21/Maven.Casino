@@ -27,6 +27,10 @@ public class Player {
     }
 
     public ArrayList<Card> getHand(){
+
+        return hand;
+    }
+    public ArrayList<Card> getSortedHand(){
         sortHand();
         return hand;
     }

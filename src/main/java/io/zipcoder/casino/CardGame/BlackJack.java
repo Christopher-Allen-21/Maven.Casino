@@ -27,8 +27,8 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
             resetGame();
             Collections.shuffle(deck);
             dealCards();
-            getPlayerTotals();
-            getDealerTotal();
+            getPlayerTotal(player1);
+            getPlayerTotal(dealer1);
             console.checkPlayerHand(player1.getName(), player1.getHand(), player1.getHandTotal());
             console.checkPlayerHand(dealer1.getName(), dealer1.getHand(), dealer1.getHandTotal());
             if (player1.getHandTotal() != 21) {
@@ -58,8 +58,7 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
     public void checkIfPlayerHit (){
         if (Objects.equals(console.askHitOrStay(), "hit")) {
             addCard();
-           aceCheck(player1);
-            getPlayerTotals();
+            getPlayerTotal(player1);
             console.checkPlayerHand(player1.getName(),player1.getHand(), player1.getHandTotal());
         }
         else if(Objects.equals(console.askHitOrStay(), "stay")) {
@@ -72,41 +71,27 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
         while(dealer1.getHandTotal() <=18) {
             dealer1.getHand().add(deck.get(deckIndex));
             deckIndex++;
-            getDealerTotal();
-            //aceCheck(dealer1);
+            getPlayerTotal(dealer1);
             console.checkPlayerHand(dealer1.getName(), dealer1.getHand(), dealer1.getHandTotal());
         }
     }
 
 
-    public void aceCheck(Player player){
+    public void getPlayerTotal(Player player){
         int total = 0;
         for(int i = 0; i < player.getHand().size(); i++){
-            if(player.getHand().indexOf(i) == 11 && player.getHandTotal() > 21){
-                total = player.getHandTotal() - 10;
-                break;
+            if(player.getHand().get(i).getBlackJackValue() == 14 && total + 11 > 21) {
+                total += 1;
             }
+            else if(player.getHand().get(i).getBlackJackValue() == 14){
+                total += 11;
+            }
+            else
+            total += player.getHand().get(i).getBlackJackValue();
         }
         player.setHandTotal(total);
     }
 
-
-    public void getDealerTotal(){
-        int total = 0;
-        for(int i = 0; i < dealer1.getHand().size(); i++){
-            total += dealer1.getHand().get(i).getBlackJackValue();
-        }
-        dealer1.setHandTotal(total);
-    }
-
-
-    public void getPlayerTotals () {
-        int total = 0;
-        for(int i = 0; i < player1.getHand().size(); i++){
-            total += player1.getHand().get(i).getBlackJackValue();
-        }
-        player1.setHandTotal(total);
-    }
 
 
     public void playerLosesBet () {

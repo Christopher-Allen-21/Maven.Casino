@@ -56,13 +56,13 @@ public class ChoHanGame implements GameInterface {
             // note even - save to variable?
         }
         else {
-            getStringInput("Please enter 1 or 2");
+            //getStringInput("Please enter 1 or 2");
         }
     }
 
     public void askWager() {
         Double playerBet = myConsole.getDoubleInput("How much would you like to bet? Enter dollar amount.");
-        player1.placeBet(); // askWager method same as placeBet method of Gambling player superclass? need to override?
+        //player1.placeBet(); // askWager method same as placeBet method of Gambling player superclass? need to override?
         //System.out.printf("%8.2f", x); - print in money format
         //System.out.printf("Hello, %s. Next year, you'll be %d", name, age); format with multiple args and multiple formats
         System.out.printf("You have wagered %8.2F", playerBet); // need to doublecheck formatting on this, maybe just use "You have wagered $" + playerBet + ".00."
@@ -80,7 +80,7 @@ public class ChoHanGame implements GameInterface {
             playerChoice = myConsole.getStringInput("You must enter 1 to roll the dice. You may enter 0 to exit the game and return to the game menu."); // figure this one out
             // need loop here? to return to beginning of method?
 
-        }
+        }return 0;
     }
 
     public void displayDice() {
@@ -100,9 +100,9 @@ public class ChoHanGame implements GameInterface {
         }
     }
 
-    public String getStringInput(String prompt, Object... args) {
-        println(prompt, args);
-        return input.nextLine();
+//    public String getStringInput(String prompt, Object... args) {
+//        println(prompt, args);
+//        return input.nextLine();
 
         /*
         greet player
@@ -146,7 +146,7 @@ public class ChoHanGame implements GameInterface {
 
         */
 
-    }
+
 
     public void compareTotals () {
     }
