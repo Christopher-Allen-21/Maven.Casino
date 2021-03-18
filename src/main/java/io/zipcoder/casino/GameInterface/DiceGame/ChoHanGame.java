@@ -8,12 +8,17 @@ import io.zipcoder.casino.utilities.Console;
 import static jdk.nashorn.internal.objects.Global.println;
 
 public class ChoHanGame implements GameInterface {
-    private Console myConsole = new Console(System.in,System.out);
+    @Override
+    public void checkWinner() {
+
+    }
+
+    private Console myConsole = new Console(System.in, System.out);
 
     private Player player1;
     private int rollValue;
     private double playerBet;
-    private int playerChoice;  // 1 for odd, 2 for even
+    private String playerChoice;  // 1 for odd, 2 for even
     private boolean diceOddEven;  // true for odd, false for even
 
     private Dice playerDice = new Dice();
@@ -23,115 +28,118 @@ public class ChoHanGame implements GameInterface {
     }
 
 
-
-    public void startGame(){
-    do {
-        greetPlayer();
-       } while(true) {
-            askEvenOrOdd();
-            askWager();
-                placeBet()
-            rollDice();
-            printasciArt(); and value
-            checkEvenOrOdd();
-            checkWinLoss();
-            reportWinLoss();
-            setPlayerBalance();
-            displaySummary();
-            displayPlayAgain(String gameName) // Cho-Han
-            quitGame();
-                cashOut();
-                collectWinnings();
-
-        }
+    public void startGame() {
+        boolean redo = true;
 
 
+        while (redo) {
+            greetPlayer();
+            askEvenOdd();
+            //askWager();
+                //placeBet();
+            askRollDice();
+            //printasciArt();
+            //and value
+            ifOdd();
+//            checkWinLoss();
+//            reportWinLoss();
+//            setPlayerBalance();
+//            displaySummary();
+//            displayPlayAgain("Cho-Han"); // Cho-Han
+//            quitGame();
+//            cashOut();
+//            collectWinnings();
 
-    public void greetPlayer() {
-        System.out.println("Welcome to Cho-Han!");
-    }
-
-    public boolean askEvenOdd() {
-        System.out.println("Place your bet: Even or Odd?");
-        String playerChoice = "";
-        // put in while loop
-        playerChoice = myConsole.getStringInput("Select 1 for 'odd', Select 2 for 'even'");
-        if (playerChoice.equals("1")) {
-            // note odd - save to variable?
-        } else if (playerChoice.equals("2")) {
-            // note even - save to variable? an int 1 or 2
-        }
-        else {
-            getStringInput("Please enter 1 or 2"); // testing if 1 or 2
         }
     }
 
-    public void askWager() {
-        playerBet = myConsole.getDoubleInput("How much would you like to bet? Enter dollar amount.");
-        player1.placeBet(); // askWager method same as placeBet method of Gambling player superclass? need to override?
-        //need to extend gambling player class to player
-        //System.out.printf("%8.2f", x); - print in money format
-        //System.out.printf("Hello, %s. Next year, you'll be %d", name, age); format with multiple args and multiple formats
-        System.out.printf("You have wagered %8.2F", playerBet); // need to doublecheck formatting on this, maybe just use "You have wagered $" + playerBet + ".00."
-    }
 
-    public int askRollDice() { // needs tweaks
-        System.out.println("Are you ready to roll?");
-        while (true) {
-            String playerChoice = myConsole.getStringInput("Enter 1 to roll dice");
-            if (playerChoice.equals("1")) {
-                rollValue = playerDice.rollPairDice(); // Display dice - make display dice method.
-                return rollValue;
-            }
-            else {
-                playerChoice = myConsole.getStringInput("You must enter 1 to roll the dice.");
+        public void greetPlayer () {
+            System.out.println("Welcome to Cho-Han!");
+        }
+
+        public void askEvenOdd () {
+            System.out.println("Place your bet: Even or Odd?");
+            boolean redo = true;
+            while (redo) {
+                playerChoice = myConsole.getStringInput("Select 1 for 'odd', Select 2 for 'even'");
+                if (playerChoice.equals("1")) {
+                    playerChoice = "1"; // 1 for odd
+                    redo = false;
+                } else if (playerChoice.equals("2")) {
+                    playerChoice = "2"; // 2 for even
+                    redo = false;
+                } else {
+                    myConsole.getDoubleInput("Please enter 1 or 2"); // testing if 1 or 2
+                }
             }
         }
-    }
 
-    public void displayDice() {
-        getDie1Image();
-        getDie2Image();
+//        public void askWager () {
+//            playerBet = myConsole.getDoubleInput("How much would you like to bet? Enter dollar amount.");
+//            if ()
+//            //player1.placeBet(); // askWager method same as placeBet method of Gambling player superclass? need to override?
+//            //need to extend gambling player class to player
+//            //System.out.printf("%8.2f", x); - print in money format
+//            //System.out.printf("Hello, %s. Next year, you'll be %d", name, age); format with multiple args and multiple formats
+//            System.out.printf("You have wagered %8.2F", playerBet); // need to doublecheck formatting on this, maybe just use "You have wagered $" + playerBet + ".00."
+//        }
 
-    }
-    public void getDie1Image() {} // ASCI art of the two dice
-
-    public void getDie2Image() {} // ASCI art of the two dice
-
-    public boolean ifOdd() {
-        if (rollValue % 2 != 0) {
-            return true;          // true if roll odd
-        } else {
-            return false;         // false if roll even
+        public int askRollDice () { // needs tweaks
+            System.out.println("Are you ready to roll?");
+            boolean redo = true;
+            String playerRolls;
+            while (redo) {
+                playerRolls = myConsole.getStringInput("Enter 1 to roll dice");
+                if (playerRolls.equals("1")) {
+                    rollValue = playerDice.rollPairDice(); // Display dice - make display dice method.
+                    redo = false;
+                }
+            } return rollValue;
         }
-    }
-    public boolean getWinLoss() { // possibly use .checkWinner here from Game Interface
-        if (playerChoice == 1 && ifOdd()) {
-            System.out.println("Congratulations, you win!");
-            return true;
-        } else if (playerChoice == 2 && ifOdd()) {
-            System.out.println("Congratulations, you win!");
-            return true;
+
+//    public void displayDice() {
+//        getDie1Image();
+//        getDie2Image();
+//
+//    }
+//    public void getDie1Image() {} // ASCI art of the two dice
+//
+//    public void getDie2Image() {} // ASCI art of the two dice
+
+        public boolean ifOdd () {
+            if (rollValue % 2 != 0) {
+                return true;          // true if roll odd
+            } else {
+                return false;         // false if roll even
+            }
         }
-        else {
-            System.out.println("Sorry, you lost! Better luck next time.");
-            return false;
+        public boolean getWinLoss () { // possibly use .checkWinner here from Game Interface
+            if (playerChoice.equals("1") && ifOdd()) {
+                System.out.println("Congratulations, you win!");
+                return true;
+            } else if (playerChoice.equals("2") && ifOdd()) {
+                System.out.println("Congratulations, you win!");
+                return true;
+            } else {
+                System.out.println("Sorry, you lost! Better luck next time.");
+                return false;
+            }
         }
-    }
 
 
-    public void compareTotals () {
+        public void compareTotals () {
+        }
+
+        public void playerLosesBet () {
+        }
+        public void playerWinsBet () {
+        }
+        public void playerHasNoMoney () {
+        }
+
+//        public void checkWinner () { // use this method instead of getWinLoss()?
+//
+//        }
     }
 
-    public void playerLosesBet () {
-    }
-    public void playerWinsBet () {
-    }
-    public void playerHasNoMoney () {
-    }
-
-    public void checkWinner() { // use this method instead of getWinLoss()?
-
-    }
-
-}
