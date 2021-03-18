@@ -1,6 +1,4 @@
 package io.zipcoder.casino.CardGame;
-
-import io.zipcoder.casino.Card;
 import io.zipcoder.casino.GameInterface.GamblingGameInterface;
 import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
@@ -10,7 +8,6 @@ import java.util.Objects;
 
 public class BlackJack extends CardGame implements GamblingGameInterface {
     private Console console = new Console(System.in,System.out);
-    private Card card;
     int deckIndex = 0;
     Player player1;
     Player dealer1 = new Player("Nobles");
@@ -30,10 +27,10 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
             resetGame();
             Collections.shuffle(deck);
             dealCards();
-            getPlayerTotals();
-            getDealerTotal();
-            console.checkPlayerHand(player1, player1.getHand(), player1.getHandTotal());
-            console.checkPlayerHand(dealer1, dealer1.getHand(), dealer1.getHandTotal());
+            getPlayerTotal(player1);
+            getPlayerTotal(dealer1);
+            console.checkPlayerHand(player1.getName(), player1.getHand(), player1.getHandTotal());
+            console.checkPlayerHand(dealer1.getName(), dealer1.getHand(), dealer1.getHandTotal());
             if (player1.getHandTotal() != 21) {
                 do {
                     checkIfPlayerHit();
@@ -61,51 +58,40 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
     public void checkIfPlayerHit (){
         if (Objects.equals(console.askHitOrStay(), "hit")) {
             addCard();
-            //aceCheck();
-            getPlayerTotals();
-            console.checkPlayerHand(player1,player1.getHand(), player1.getHandTotal());
+            getPlayerTotal(player1);
+            console.checkPlayerHand(player1.getName(),player1.getHand(), player1.getHandTotal());
         }
         else if(Objects.equals(console.askHitOrStay(), "stay")) {
-            hit = false;//Needs to change to method that makes the dealer draw cards until they have 18 or less;
+            hit = false;
         }
     }
 
 
     public void dealerAI(){
-        do{
-            player1.getHand().add(deck.get(deckIndex));
+        while(dealer1.getHandTotal() <=18) {
+            dealer1.getHand().add(deck.get(deckIndex));
             deckIndex++;
-            getDealerTotal();
-            console.checkPlayerHand(dealer1, dealer1.getHand(), dealer1.getHandTotal());
-        }while(dealer1.getHandTotal() <= 15);
+            getPlayerTotal(dealer1);
+            console.checkPlayerHand(dealer1.getName(), dealer1.getHand(), dealer1.getHandTotal());
+        }
     }
 
 
-    public void aceCheck(){
-        if(player1.getHand().contains(card.getBlackJackValue() == 11)) {
-            if (player1.getHandTotal() > 22) {
-                player1.incrementHandTotal(-10);
+    public void getPlayerTotal(Player player){
+        int total = 0;
+        for(int i = 0; i < player.getHand().size(); i++){
+            if(player.getHand().get(i).getBlackJackValue() == 14 && total + 11 > 21) {
+                total += 1;
             }
+            else if(player.getHand().get(i).getBlackJackValue() == 14){
+                total += 11;
+            }
+            else
+            total += player.getHand().get(i).getBlackJackValue();
         }
+        player.setHandTotal(total);
     }
 
-
-    public void getDealerTotal(){
-        Integer total = 0;
-        for(int i = 0; i < dealer1.getHand().size(); i++){
-            total += dealer1.getHand().get(i).getBlackJackValue();
-        }
-        dealer1.setHandTotal(total);
-    }
-
-
-    public void getPlayerTotals () {
-        Integer total = 0;
-        for(int i = 0; i < player1.getHand().size(); i++){
-            total += player1.getHand().get(i).getBlackJackValue();
-        }
-        player1.setHandTotal(total);
-    }
 
 
     public void playerLosesBet () {
@@ -118,17 +104,17 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
 
     public void checkWinner () {
         if((player1.getHandTotal() > dealer1.getHandTotal())   && player1.getHandTotal() < 22) {
-            System.out.println("\nplayer1 Wins");
+            System.out.println(player1.getName() + " Wins");
         }
         else if(player1.getHandTotal() < 22 && dealer1.getHandTotal() > 21){
-            System.out.println("\nplayer1 Wins");
+            System.out.println(player1.getName() +" Wins");
         }
 
         else if((dealer1.getHandTotal() > player1.getHandTotal())   && dealer1.getHandTotal() < 22) {
-            System.out.println("\ndealer1 Wins");
+            System.out.println(player1.getName() + " Wins");
         }
         else if(dealer1.getHandTotal() < 22 && player1.getHandTotal() > 21){
-            System.out.println("\ndealer1 Wins");
+            System.out.println(dealer1.getName()+" Wins");
         }
         else if((player1.getHandTotal() == dealer1.getHandTotal()) ||
                 (player1.getHandTotal() > 21 && dealer1.getHandTotal() > 21) ){

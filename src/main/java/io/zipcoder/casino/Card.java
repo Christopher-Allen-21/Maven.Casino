@@ -79,10 +79,7 @@ public class Card implements Comparable<Card>{
 
     public int getBlackJackValue(){
         int value = 0;
-        if(getValue() == 14){ //Ace
-            value = 11;
-        }
-        else if(getValue() > 10){ //Face cards
+        if(getValue() == 11 || getValue() == 12 || getValue() == 13){ //Face cards
             value = 10;
         }
         else{
