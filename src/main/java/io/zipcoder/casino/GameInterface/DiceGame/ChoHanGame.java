@@ -12,8 +12,6 @@ import static jdk.nashorn.internal.objects.Global.println;
 public class ChoHanGame implements GameInterface {
 
 
-
-
     private Console myConsole = new Console(System.in, System.out);
 
     private GamblingPlayer player1;
@@ -21,8 +19,8 @@ public class ChoHanGame implements GameInterface {
     private double playerBet = 0.0;
     private String playerChoice;  // even or odd
     private boolean diceOddEven;  // true for odd, false for even
-
     private Dice playerDice = new Dice();
+
 
     public ChoHanGame(GamblingPlayer player1) {
         this.player1 = player1;
