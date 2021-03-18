@@ -26,7 +26,6 @@ import java.util.Random;
 // Notify who the winner is
 // Prompt user to play again or exit back to casino
 
-
 public class GoFishGame extends CardGame {
 
     private Console myConsole = new Console(System.in,System.out);
@@ -34,7 +33,6 @@ public class GoFishGame extends CardGame {
     private Player aiPlayer = new Player("Nobles");
     int deckIndex = 0;
     int bookTotal = 0;
-    boolean lessThanThirteenBooks = true;
 
     public GoFishGame(Player currentPlayer){
         super();
@@ -61,7 +59,6 @@ public class GoFishGame extends CardGame {
 
         }
     }
-
 
     public void resetGame(){
         deckIndex = 0;
@@ -148,7 +145,6 @@ public class GoFishGame extends CardGame {
                 valueOfBook = i;
             }
         }
-
         return valueOfBook;
     }
 
@@ -271,18 +267,10 @@ public class GoFishGame extends CardGame {
     }
 
     public String convertToFaceCardName(Integer card){
-        if(card == 11){
-            return "Jack";
-        }
-        else if(card == 12){
-            return "Queen";
-        }
-        else if(card == 13){
-            return "King";
-        }
-        else{
-            return "Ace";
-        }
+        if(card == 11){ return "Jack"; }
+        else if(card == 12){ return "Queen"; }
+        else if(card == 13){ return "King"; }
+        else{ return "Ace"; }
     }
 
     private void checkForWinner() {
