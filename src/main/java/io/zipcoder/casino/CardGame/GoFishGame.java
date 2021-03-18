@@ -35,6 +35,7 @@ public class GoFishGame extends CardGame {
     private Player currentPlayer;
     private Player aiPlayer = new Player("Nobles");
     int deckIndex = 0;
+    int bookTotal = 0;
 
     public GoFishGame(Player currentPlayer){
         super();
@@ -48,7 +49,7 @@ public class GoFishGame extends CardGame {
             dealCards();
             displayHands();
             checkForBooks();
-            while(deckIndex<51){
+            while(bookTotal != 13){
                 while(playerAskForCards()){
                     checkForBooks();
                 }
@@ -68,6 +69,7 @@ public class GoFishGame extends CardGame {
 
     public void resetGame(){
         deckIndex = 0;
+        bookTotal = 0;
         currentPlayer.getHand().clear();
         aiPlayer.getHand().clear();
         Collections.shuffle(deck);
@@ -130,13 +132,27 @@ public class GoFishGame extends CardGame {
     }
 
     public Integer getValueOfBook(Player player){
-        int valueOfBook = -1;
+        HashMap<Integer,Integer> match = new HashMap<>();
+        Integer valueOfBook = -1;
+
+        for(int i=2;i<=14;i++){
+            match.put(i,0);
+        }
+
         for(int i=0;i<player.getHand().size();i++){
-            if(Collections.frequency(player.getHand(),i)==4){
-                valueOfBook = player.getHand().get(i).getValue();
-                break;
+            for(Integer j : match.keySet()){
+                if(player.getHand().get(i).getValue()==j){
+                    match.put(j,match.get(j)+1);
+                }
             }
         }
+
+        for(Integer i : match.keySet()){
+            if(match.get(i)==4){
+                valueOfBook = i;
+            }
+        }
+
         return valueOfBook;
     }
 
@@ -150,6 +166,7 @@ public class GoFishGame extends CardGame {
         }
         player.getHand().removeAll(cardsToRemove);
         currentPlayer.incrementNumBooks(1);
+        bookTotal++;
     }
 
     public boolean playerAskForCards(){
@@ -237,14 +254,4 @@ public class GoFishGame extends CardGame {
     private String checkForWinner() {
         return null;
     }
-
-
-    public void compareNumBooks(){}
-    public void passPlayCard(){}
-
-    public void checkWinner() {
-
-    }
-
-
 }
