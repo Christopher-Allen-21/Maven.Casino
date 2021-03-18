@@ -163,8 +163,8 @@ public final class Console {
        return null;
     }
 
-    public void checkPlayerHand (Player player1, ArrayList<Card> playerHand, Integer total){
-        System.out.println(player1);
+    public void checkPlayerHand (String playerName, ArrayList<Card> playerHand, Integer total){
+        System.out.println(playerName);
         System.out.println("Current hand: ");
         for(int i = 0; i < playerHand.size(); i++ ){
             System.out.println(playerHand.get(i));
