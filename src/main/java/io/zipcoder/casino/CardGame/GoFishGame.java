@@ -10,7 +10,7 @@ import java.util.Random;
 // Deal 9 cards to player and ai
 // Check player hand to see if they have 4 of the same values
 // Check ai hand to see if they have 4 of the same values
-// While deckIndex < NUM_OF_CARDS
+// While numBooks < 14
 //   Display player's hand and prompt user for input
 //   Player picks a card to ask for
 //      If ai has card, then transfer all cards of that value from ai hand to user hand
@@ -48,15 +48,12 @@ public class GoFishGame extends CardGame {
             dealCards();
             displayHands();
             checkForBooks();
-            while(lessThanThirteenBooks){
-                if(bookTotal==13){ lessThanThirteenBooks=false;}
-                while(playerAskForCards()){
-                }
-                if(bookTotal==13){ lessThanThirteenBooks=false;}
-                while(aiAskForCards()){
-                }
+            while(true){
+                while(playerAskForCards()){ }
+                if(bookTotal==13){ break;}
+                while(aiAskForCards()){ }
+                if(bookTotal==13){ break;}
             }
-
             checkForWinner();
             if(!myConsole.displayPlayAgain("Go Fish")){
                 break;
@@ -76,7 +73,7 @@ public class GoFishGame extends CardGame {
 
     @Override
     public void dealCards(){
-        for(int i=0;i<8;i++){
+        for(int i=0;i<9;i++){
             currentPlayer.getHand().add(deck.get(deckIndex));
             deckIndex++;
 
@@ -169,6 +166,9 @@ public class GoFishGame extends CardGame {
     }
 
     public boolean playerAskForCards(){
+        if(bookTotal>=13){
+            return false;
+        }
         Integer cardPicked = myConsole.getCardInput("Enter a card to ask for:");
         myConsole.println("\nPlayer asked for "+cardPicked);
 
@@ -194,6 +194,9 @@ public class GoFishGame extends CardGame {
     }
 
     public boolean aiAskForCards(){
+        if(bookTotal>=13){
+            return false;
+        }
         Random random  = new Random();
         Integer aiCardPicked = 2 + random.nextInt(14-2+1);
 
@@ -284,10 +287,10 @@ public class GoFishGame extends CardGame {
 
     private void checkForWinner() {
         if(currentPlayer.getNumBooks() > aiPlayer.getNumBooks()){
-            System.out.println("Congratulations! You Win!");
+            System.out.println("Congratulations! You Win!\n");
         }
         else{
-            System.out.println("You lose! Better luck next time");
+            System.out.println("You lose! Better luck next time\n");
         }
     }
 }
