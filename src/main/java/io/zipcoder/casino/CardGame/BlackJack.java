@@ -10,9 +10,9 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
     private Console console = new Console(System.in,System.out);
     int deckIndex = 0;
     Player player1;
-    Player dealer1 = new Player("Nobles");
-    Player dealer2 = new Player("Dolio");
-    Player dealer3 = new Player("Younger");
+    Player dealer1 = new Player("Nobles", 100.0);
+    Player dealer2 = new Player("Dolio",100.0);
+    Player dealer3 = new Player("Younger", 100.0);
     boolean gameOn = true;
     boolean hit = true;
 

@@ -30,7 +30,7 @@ public class GoFishGame extends CardGame {
 
     private Console myConsole = new Console(System.in,System.out);
     private Player currentPlayer;
-    private Player aiPlayer = new Player("Nobles");
+    private Player aiPlayer = new Player("Nobles", 100.0);
     int deckIndex = 0;
     int bookTotal = 0;
 
