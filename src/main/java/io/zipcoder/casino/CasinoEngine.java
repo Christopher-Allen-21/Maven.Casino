@@ -30,7 +30,7 @@ public class CasinoEngine {
                 runCraps(currentPlayer);
             }
             else if(gameSelection.equals("3")){
-                runChoHan(currentPlayer);
+               // runChoHan(currentPlayer);
             }
             else if(gameSelection.equals("4")){
                 runGoFish(currentPlayer);
@@ -59,11 +59,13 @@ public class CasinoEngine {
         CrapsGame craps = new CrapsGame(currentPlayer);
     }
 
+
     public void runChoHan(GamblingPlayer currentPlayer){
         System.out.print("Entering Cho Han\n\n");
         ChoHanGame choHan = new ChoHanGame(currentPlayer);
         choHan.startGame();
     }
+
 
 
 
