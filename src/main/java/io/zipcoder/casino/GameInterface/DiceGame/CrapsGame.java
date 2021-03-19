@@ -65,7 +65,8 @@ public class CrapsGame extends DiceGame implements GamblingGameInterface {
     int point;
     int stageOfGame = 1;
     Dice dice = new Dice();
-    HashMap<String,Integer> currentBets = new HashMap<>();
+    int currentDiceRoll = 0;
+    HashMap<String,Double> currentBets = new HashMap<>();
     Console myConsole = new Console(System.in,System.out);
     Player player;
 
@@ -77,8 +78,25 @@ public class CrapsGame extends DiceGame implements GamblingGameInterface {
 
         while(true){
             resetGame();
-            makeBet();
-            compareBetsToDiceRoll(dice.rollPairDice());
+            //stage 1
+            while(true){
+                makeBet();
+                currentDiceRoll = dice.rollPairDice();
+                compareBetsToDiceRoll(currentDiceRoll);
+                if(diceRollEqual4_5_6_8_9_10(currentDiceRoll)){
+                    break;
+                }
+            }
+
+            //stage2
+            while(true){
+                makeBet();
+                currentDiceRoll = dice.rollPairDice();
+                compareBetsToDiceRoll(currentDiceRoll);
+                if(currentDiceRoll==point){
+                    break;
+                }
+            }
 
 
             if(!myConsole.displayPlayAgain("Craps")){
@@ -98,27 +116,106 @@ public class CrapsGame extends DiceGame implements GamblingGameInterface {
     public void makeBet(){
         do{
             String betChoice;
+            double betAmount = 0;
             if(stageOfGame==1){
                 betChoice = myConsole.stageOneBettingPrompt(stageOfGame);
-                currentBets.add(betChoice);
+                //bet amount doesn't check whether they have enough money in balance currently
+                betAmount = myConsole.getDoubleInput("How much would you like to bet? Enter dollar amount.");
+                currentBets.put(betChoice,betAmount);
             }
             else if(stageOfGame==2){
                 betChoice = myConsole.stageTwoBettingPrompt(stageOfGame);
-                currentBets.add(betChoice);
+                //bet amount doesn't check whether they have enough money in balance currently
+                betAmount = myConsole.getDoubleInput("How much would you like to bet? Enter dollar amount.");
+                currentBets.put(betChoice,betAmount);
             }
         } while(myConsole.makeAnotherBet());
     }
 
     public void compareBetsToDiceRoll(int diceRoll){
+        myConsole.println("You have rolled a " + diceRoll + "!");
         if(stageOfGame==1){
             if(diceRoll==7 || diceRoll==11){
-
+                passLineBet7Or11();
+            }
+            else if(diceRoll==2 || diceRoll==3 || diceRoll==12){
+                passLineBet2_3_12();
+            }
+            else{
+                stageOfGame = 2;
+                point = diceRoll;
+                myConsole.println(point+" is now the Point");
             }
         }
         else if(stageOfGame==2){
-
+            if(diceRoll==7){
+                comeLineBet_7();
+            }
+            else if(diceRoll==point){
+                comeLineBet_point();
+            }
         }
+    }
 
+    public void passLineBet7Or11(){
+        if(currentBets.containsKey("passLineBet")){
+            double amountBet = currentBets.get("passLineBet");
+            player.setPlayerBalance(player.getPlayerBalance()+amountBet);
+            myConsole.println("You won!\nPlayer Balance: $"+player.getPlayerBalance());
+        }
+        else if(currentBets.containsKey("dontPassLineBet")){
+            double amountBet = currentBets.get("passLineBet");
+            player.setPlayerBalance(player.getPlayerBalance()-amountBet);
+            myConsole.println("You lost!\nPlayer Balance: $"+player.getPlayerBalance());
+        }
+    }
+
+    public void passLineBet2_3_12(){
+        if(currentBets.containsKey("passLineBet")){
+            double amountBet = currentBets.get("passLineBet");
+            player.setPlayerBalance(player.getPlayerBalance()-amountBet);
+            myConsole.println("You lost!\nPlayer Balance: $"+player.getPlayerBalance());
+        }
+        else if(currentBets.containsKey("dontPassLineBet")){
+            double amountBet = currentBets.get("passLineBet");
+            player.setPlayerBalance(player.getPlayerBalance()+amountBet);
+            myConsole.println("You won!\nPlayer Balance: $"+player.getPlayerBalance());
+        }
+    }
+
+    public void comeLineBet_7(){
+        if(currentBets.containsKey("comeLineBet")){
+            double amountBet = currentBets.get("comeLineBet");
+            player.setPlayerBalance(player.getPlayerBalance()-amountBet);
+            myConsole.println("You lost!\nPlayer Balance: $"+player.getPlayerBalance());
+        }
+        else if(currentBets.containsKey("dontComeLineBet")){
+            double amountBet = currentBets.get("dontComeLineBet");
+            player.setPlayerBalance(player.getPlayerBalance()+amountBet);
+            myConsole.println("You won!\nPlayer Balance: $"+player.getPlayerBalance());
+        }
+    }
+
+    public void comeLineBet_point(){
+        if(currentBets.containsKey("comeLineBet")){
+            double amountBet = currentBets.get("comeLineBet");
+            player.setPlayerBalance(player.getPlayerBalance()+amountBet);
+            myConsole.println("You won!\nPlayer Balance: $"+player.getPlayerBalance());
+        }
+        else if(currentBets.containsKey("dontComeLineBet")){
+            double amountBet = currentBets.get("dontComeLineBet");
+            player.setPlayerBalance(player.getPlayerBalance()-amountBet);
+            myConsole.println("You lost!\nPlayer Balance: $"+player.getPlayerBalance());
+        }
+    }
+
+    public boolean diceRollEqual4_5_6_8_9_10(int diceRoll){
+        if(diceRoll==4 || diceRoll==5 || diceRoll==6 || diceRoll==7 || diceRoll==8 || diceRoll==10){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 

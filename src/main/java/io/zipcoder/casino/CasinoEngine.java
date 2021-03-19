@@ -16,13 +16,13 @@ public class CasinoEngine {
     Console myConsole;
 
     public CasinoEngine(){
-        currentPlayer = new Player("Player1", 100.0);
+        currentPlayer = new Player("ZipCoder", 100.0);
         myConsole = new Console(System.in,System.out);
     }
 
     public void run(){
         while(true){
-            String gameSelection = myConsole.getStringInput("Hi "+currentPlayer.getName()+"!\nWhat game would you like to play?\n1. BlackJack\n2. Craps\n3. ChoHan\n4. Go Fish\n99. Quit");
+            String gameSelection = myConsole.getStringInput("\nHi "+currentPlayer.getName()+"!\nWhat game would you like to play?\n1. BlackJack\n2. Craps\n3. ChoHan\n4. Go Fish\n99. Quit");
             if (gameSelection.equals("1")){
                 runBlackJackGame(currentPlayer);
             }
@@ -42,27 +42,27 @@ public class CasinoEngine {
     }
 
     public void runBlackJackGame(Player currentPlayer){
-        System.out.print("Entering BlackJack\n\n");
+        System.out.print("\nEntering BlackJack\n\n");
         BlackJack blackJack = new BlackJack(currentPlayer);
         blackJack.startGame();
 
     }
 
     public void runGoFish(Player currentPlayer){
-        System.out.print("Entering Go Fish\n\n");
+        System.out.print("\nEntering Go Fish\n\n");
         GoFishGame goFish = new GoFishGame(currentPlayer);
         goFish.startGame();
     }
 
     public void runCraps(Player currentPlayer){
-        System.out.print("Entering Craps\n\n");
+        System.out.print("\nEntering Craps\n\n");
         CrapsGame craps = new CrapsGame(currentPlayer);
         craps.startGame();
     }
 
 
     public void runChoHan(Player currentPlayer){
-        System.out.print("Entering Cho Han\n\n");
+        System.out.print("\nEntering Cho Han\n\n");
         ChoHanGame choHan = new ChoHanGame(currentPlayer);
         choHan.startGame();
     }
