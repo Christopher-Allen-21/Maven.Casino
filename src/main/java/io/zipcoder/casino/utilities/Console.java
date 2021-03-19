@@ -126,7 +126,7 @@ public final class Console {
     public Boolean displayPlayAgain(String gameName){
         boolean playAgain;
         while(true) {
-            System.out.println("Would you like to play " + gameName + " again?\n\nEnter yes or no");
+            System.out.println("Would you like to play " + gameName + " again?\nEnter yes or no:");
             String userInput = input.nextLine();
             if(userInput.equalsIgnoreCase("yes")){
                 playAgain = true;
@@ -170,7 +170,7 @@ public final class Console {
     }
 
 
-    public int stageOneBettingPrompt(int stageOfGame){
+    public String stageOneBettingPrompt(int stageOfGame){
         System.out.println("Stage of Game: "+stageOfGame);
         while(true) {
             println("Please enter a number to select a bet:");
@@ -179,41 +179,56 @@ public final class Console {
             println("3. Non-Field bet");
             String userInput = input.nextLine();
             if(userInput.equals("1")){
-                return 1;
+                return "passbet";
             }
             else if(userInput.equals("2")){
-                return 2;
+                return "dontPassBet";
             }
             else if(userInput.equals("3")){
-                return 3;
+                return "nonFieldBet";
             }
         }
     }
 
-    public int stageTwoBettingPrompt(int stageOfGame) {
+    public String stageTwoBettingPrompt(int stageOfGame) {
         System.out.println("Stage of Game: " + stageOfGame);
         while (true) {
             println("Please enter a number to select a bet:");
             println("1. Come Line bet");
             println("2. Don't Come Line bet");
-            println("3. Field bet");
-            println("4. Non-Field bet");
-            println("5. Place bet");
+            //println("3. Field bet");
+            //println("4. Non-Field bet");
+            //println("5. Place bet");
             String userInput = input.nextLine();
             if (userInput.equals("1")) {
-                return 1;
+                return "comeLineBet";
             } else if (userInput.equals("2")) {
-                return 2;
-            } else if (userInput.equals("3")) {
-                return 3;
-            } else if (userInput.equals("4")) {
-                return 4;
-            } else if (userInput.equals("5")) {
-                return 5;
+                return "dontComeLineBet";
+            //} else if (userInput.equals("3")) {
+            //    return "fieldBet";
+            //} else if (userInput.equals("4")) {
+            //    return "nonFieldBet";
+            //} else if (userInput.equals("5")) {
+            //    return "placeBet";
             }
         }
     }
 
-
+    public Boolean makeAnotherBet(){
+        boolean makeAnotherBet;
+        while(true) {
+            System.out.println("Would you like to make another bet?");
+            String userInput = input.nextLine();
+            if(userInput.equalsIgnoreCase("yes")){
+                makeAnotherBet = true;
+                break;
+            }
+            else if(userInput.equalsIgnoreCase("no")){
+                makeAnotherBet = false;
+                break;
+            }
+        }
+        return makeAnotherBet;
+    }
 }
 
