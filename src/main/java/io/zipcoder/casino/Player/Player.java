@@ -55,7 +55,9 @@ public class Player {
 
     public void cashOut(){ }
 
-    public void collectWinnings(){ }
+    public void collectWinnings(Double playerBet){
+        this.playerBalance += (playerBet * 2);
+    }
 
 
 
