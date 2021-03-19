@@ -1,6 +1,7 @@
-package io.zipcoder.casino.GameInterface.DiceGame;
+package io.zipcoder.casino.DiceGame;
 
 import io.zipcoder.casino.CardGame.BlackJack;
+import io.zipcoder.casino.GameInterface.DiceGame.ChoHanGame;
 import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 import org.junit.Test;
@@ -12,26 +13,7 @@ public class ChoHanGameTest {
     ChoHanGame testGame = new ChoHanGame(p1);
     Console testConsole = new Console(System.in, System.out);
 
-    @Test
-    public void askEvenOdd() { //asks for input, string even or odd, if yes, playerchoice gets set to even or odd
-        // Arrange
-        testGame.askEvenOdd();
 
-        // Act
-
-        // Assert
-
-    }
-
-    @Test
-    public void askWager() {
-        // Arrange
-
-        // Act
-
-        // Assert
-
-    }
 
     @Test
     public void askRollDice() {
@@ -46,9 +28,10 @@ public class ChoHanGameTest {
     @Test
     public void ifOdd() {
         // Arrange
-        testGame.startGame();
+        Player p1 = new Player("Kells", 100.0);
+        ChoHanGame testGame = new ChoHanGame(p1);
         // Act
-//        boolean returned = testConsole.playerChoice
+        String returned = testConsole.playerChoice;
         // Assert
 
     }
@@ -63,24 +46,6 @@ public class ChoHanGameTest {
 
     }
 
-    @Test
-    public void playerWinsBet() {
-        // Arrange
 
-        // Act
-
-        // Assert
-
-    }
-
-    @Test
-    public void displayPlayerBalance() {
-        // Arrange
-
-        // Act
-
-        // Assert
-
-    }
 
 }

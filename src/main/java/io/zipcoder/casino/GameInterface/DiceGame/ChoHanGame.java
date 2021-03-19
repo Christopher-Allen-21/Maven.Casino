@@ -139,15 +139,7 @@ public class ChoHanGame implements GameInterface, GamblingGameInterface {
        System.out.println("Your current balance is: $" + player1.getPlayerBalance());
     }
 
-    @Override
-    public void playerHasNoMoney() {
 
-    }
-
-    @Override
-    public void playerLosesBet() {
-
-    }
 
 }
 

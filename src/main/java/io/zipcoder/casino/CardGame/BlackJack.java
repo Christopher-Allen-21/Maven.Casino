@@ -142,14 +142,8 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
     }
 
 
-
-
-    public void playerLosesBet () {
-    }
     public void playerWinsBet () {
         player1.collectWinnings(playerBet);
-    }
-    public void playerHasNoMoney () {
     }
 
     public void addCard(){

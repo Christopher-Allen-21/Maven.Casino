@@ -217,14 +217,9 @@ public class CrapsGame extends DiceGame implements GamblingGameInterface {
     }
 
 
-    public void playerLosesBet() {
-    }
-
     public void playerWinsBet(){
     }
 
-    public void playerHasNoMoney(){
-    }
 
     public void checkWinner(){
     }
