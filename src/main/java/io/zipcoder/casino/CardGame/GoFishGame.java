@@ -94,7 +94,7 @@ public class GoFishGame extends CardGame {
         }
         if(checkHandForBooks(aiPlayer)){
             removeBookAndIncrementNumBooks(aiPlayer,getValueOfBook(aiPlayer));
-            myConsole.println("\nAI got a book!\n");
+            myConsole.println("\nNobles got a book!\n");
             displayHands();
         }
     }
@@ -169,7 +169,7 @@ public class GoFishGame extends CardGame {
         myConsole.println("\nPlayer asked for "+cardPicked);
 
         if(checkHand(aiPlayer,cardPicked)){ //checking AI hand for player card picked
-            myConsole.println("Correct!\nPlayer Taking AI Card\n");
+            myConsole.println("Correct!\nPlayer Taking Nobles' Card\n");
             transferCard(aiPlayer,currentPlayer,getValueOfMatch(aiPlayer,cardPicked));//ai player transferring cards to current player
             displayHands();
             checkForBooks();
@@ -196,27 +196,27 @@ public class GoFishGame extends CardGame {
         Random random  = new Random();
         Integer aiCardPicked = 2 + random.nextInt(14-2+1);
 
-        String playerInput = myConsole.getStringInput("AI's turn\nPress any button to continue\n");
+        String playerInput = myConsole.getStringInput("Nobles' turn\nPress any button to continue\n");
 
         if(playerInput != null){
             if(aiCardPicked>10){
                 String faceCardName = convertToFaceCardName(aiCardPicked);
-                myConsole.println("AI asked for "+faceCardName);
+                myConsole.println("Nobles asked for "+faceCardName);
             }
             else{
-                myConsole.println("AI asked for "+aiCardPicked);
+                myConsole.println("Nobles asked for "+aiCardPicked);
             }
 
             if(checkHand(currentPlayer, aiCardPicked)){ //checking current player hand for ai card picked
                 transferCard(currentPlayer, aiPlayer,getValueOfMatch(currentPlayer,aiCardPicked)); //current player transferring cards to aiPlayer
-                myConsole.println("AI Taking Player Card\n");
+                myConsole.println("Nobles Taking Player Card\n");
                 displayHands();
                 checkForBooks();
                 return true;
             }
             else{
                 if(deckIndex < 52){
-                    myConsole.println("AI Drawing From Deck\n");
+                    myConsole.println("Nobles Drawing From Deck\n");
                     takeCardFromDeck(aiPlayer);
                 }
                 displayHands();

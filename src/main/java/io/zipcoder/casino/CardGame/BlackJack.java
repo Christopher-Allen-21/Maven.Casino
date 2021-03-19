@@ -29,7 +29,8 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
             Collections.shuffle(deck);
             System.out.println("Current Balance: " + player1.getPlayerBalance());
             getBet ();
-            dealCards();
+            dealCards(player1);
+            dealCards(dealer1);
             getPlayerTotal(player1);
             getPlayerTotal(dealer1);
             console.checkPlayerHand(player1.getName(), player1.getHand(), player1.getHandTotal());
@@ -57,19 +58,20 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
         dealer1.setHandTotal(0);
         dealer1.getHand().clear();
     }
-    public void getBet () {
+    public Double getBet () {
         playerBet = console.getDoubleInput("How much would you like to bet? Enter dollar amount.");
         player1.placeBet(playerBet);
         System.out.println("You have wagered $" + playerBet + "\n");
+        return playerBet;
     }
-    public void dealCards(){
+    public void dealCards(Player player){
 
-        while(player1.getHand().size() < 2) {
-            player1.getHand().add(deck.get(deckIndex));
+        while(player.getHand().size() < 2) {
+            player.getHand().add(deck.get(deckIndex));
             deckIndex++;
         }
-        while (dealer1.getHand().size() < 2) {
-            dealer1.getHand().add(deck.get(deckIndex));
+        while (player.getHand().size() < 2) {
+            player.getHand().add(deck.get(deckIndex));
             deckIndex++;
         }
     }
@@ -149,11 +151,6 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
     }
     public void playerHasNoMoney () {
     }
-
-
-
-
-
 
     public void addCard(){
         player1.getHand().add(deck.get(deckIndex));

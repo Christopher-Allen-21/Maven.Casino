@@ -3,6 +3,7 @@ import io.zipcoder.casino.Card;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 public class Player {
     String playerName;
@@ -41,13 +42,8 @@ public class Player {
     public void incrementHandTotal(Integer amountToAdd){handTotal+=amountToAdd;}
     public void setHandTotal(Integer handTotal){this.handTotal = handTotal;}
 
-    public Double getPlayerBalance(){
-        return playerBalance;
-    }
-
-    public void setPlayerBalance(Double playerBalance){
-        this.playerBalance = playerBalance;
-    }
+    public Double getPlayerBalance(){ return playerBalance; }
+    public void setPlayerBalance(Double playerBalance){ this.playerBalance = playerBalance; }
 
     public void placeBet(Double playerBalance){
         this.playerBalance -= playerBalance;
