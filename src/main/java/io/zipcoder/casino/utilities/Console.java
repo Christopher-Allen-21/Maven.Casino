@@ -126,7 +126,7 @@ public final class Console {
     public Boolean displayPlayAgain(String gameName){
         boolean playAgain;
         while(true) {
-            System.out.println("Would you like to play " + gameName + " again?\nEnter yes or no:");
+            System.out.println("\nWould you like to play " + gameName + " again?\nEnter yes or no:");
             String userInput = input.nextLine();
             if(userInput.equalsIgnoreCase("yes")){
                 playAgain = true;
@@ -170,12 +170,13 @@ public final class Console {
     }
 
 
-    public String stageOneBettingPrompt(int stageOfGame){
-        System.out.println("Stage of Game: "+stageOfGame+"\n");
+    public String stageOneBettingPrompt(int stageOfGame, Player player){
+        println("Stage of Game: "+stageOfGame+"\n");
+        println(player.getName()+" balance: $"+player.getPlayerBalance());
         while(true) {
             println("Please enter a number to select a bet:");
-            println("1. Pass Line bet");
-            println("2. Don't Pass Line bet");
+            println("1. Pass Line bet (Betting on roll being 7 or 11)");
+            println("2. Don't Pass Line bet (Betting on roll being 2, 3, or 12)");
             //println("3. Non-Field bet");
             String userInput = input.nextLine();
             if(userInput.equals("1")){
@@ -190,8 +191,10 @@ public final class Console {
         }
     }
 
-    public String stageTwoBettingPrompt(int stageOfGame) {
-        System.out.println("Stage of Game: " + stageOfGame+"\n");
+    public String stageTwoBettingPrompt(int stageOfGame,Player player, int point) {
+        println("Stage of Game: " + stageOfGame+"\n");
+        println(player.getName()+" balance: $"+player.getPlayerBalance());
+        println("Point: "+point);
         while (true) {
             println("Please enter a number to select a bet:");
             println("1. Come Line bet (Betting Point will roll again before 7)");

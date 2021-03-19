@@ -118,13 +118,13 @@ public class CrapsGame extends DiceGame implements GamblingGameInterface {
             String betChoice;
             double betAmount = 0;
             if(stageOfGame==1){
-                betChoice = myConsole.stageOneBettingPrompt(stageOfGame);
+                betChoice = myConsole.stageOneBettingPrompt(stageOfGame,player);
                 //bet amount doesn't check whether they have enough money in balance currently
                 betAmount = myConsole.getDoubleInput("How much would you like to bet? Enter dollar amount.");
                 currentBets.put(betChoice,betAmount);
             }
             else if(stageOfGame==2){
-                betChoice = myConsole.stageTwoBettingPrompt(stageOfGame);
+                betChoice = myConsole.stageTwoBettingPrompt(stageOfGame,player,point);
                 //bet amount doesn't check whether they have enough money in balance currently
                 betAmount = myConsole.getDoubleInput("How much would you like to bet? Enter dollar amount.");
                 currentBets.put(betChoice,betAmount);
@@ -153,6 +153,9 @@ public class CrapsGame extends DiceGame implements GamblingGameInterface {
             }
             else if(diceRoll==point){
                 comeLineBet_point();
+            }
+            else if(diceRoll!=7 || diceRoll!=point){
+                myConsole.println("No winner! Rolling again!");
             }
         }
     }
