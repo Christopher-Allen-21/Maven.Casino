@@ -46,9 +46,9 @@ public class ChoHanGameTest {
     @Test
     public void ifOdd() {
         // Arrange
-
+        testGame.startGame();
         // Act
-
+//        boolean returned = testConsole.playerChoice
         // Assert
 
     }
