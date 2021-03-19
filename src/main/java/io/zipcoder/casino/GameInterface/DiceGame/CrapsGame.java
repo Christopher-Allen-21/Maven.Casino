@@ -87,7 +87,6 @@ public class CrapsGame extends DiceGame implements GamblingGameInterface {
                     break;
                 }
             }
-
             //stage2
             while(true){
                 makeBet();
@@ -97,14 +96,10 @@ public class CrapsGame extends DiceGame implements GamblingGameInterface {
                     break;
                 }
             }
-
-
             if(!myConsole.displayPlayAgain("Craps")){
                 break;
             }
         }
-
-
     }
 
 
