@@ -15,6 +15,18 @@ public class GoFishGameTest extends TestCase {
     }
 
     public void testDealCards() {
+        //Arrange
+        Player player = new Player("Name", 100.0);
+        GoFishGame game = new GoFishGame(player);
+        player.getHand().clear();
+
+        //Action
+        game.dealCards();
+        int expected = 9;
+        int actual = player.getHand().size();
+
+        //Assert
+        Assert.assertEquals(expected,actual);
     }
 
     public void testPlayerAskForCards() {
@@ -36,6 +48,18 @@ public class GoFishGameTest extends TestCase {
     }
 
     public void testResetGame() {
+        //Arrange
+        Player player = new Player("Name", 100.0);
+        GoFishGame game = new GoFishGame(player);
+        game.dealCards();
+
+        //Action
+        game.resetGame();
+        int expected = 0;
+        int actual = player.getHand().size();
+
+        //Assert
+        Assert.assertEquals(expected,actual);
     }
 
     public void testCheckPlayerHandForBooks() {
