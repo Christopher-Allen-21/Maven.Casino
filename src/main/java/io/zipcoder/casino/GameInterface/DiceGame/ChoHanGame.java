@@ -36,13 +36,9 @@ public class ChoHanGame implements GameInterface, GamblingGameInterface {
     //            //and value
             ifOdd();
             checkWinner();
-    //            setPlayerBalance();
             displayPlayerBalance();
             redo = myConsole.displayPlayAgain("Cho-Han"); // Cho-Han
             } while (redo);
-    //            quitGame();
-    //            cashOut();
-    //            collectWinnings();
 
     }
 

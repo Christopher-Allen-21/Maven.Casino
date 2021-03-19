@@ -11,6 +11,7 @@ import java.util.Random;
 
 public class GoFishGameTest extends TestCase {
 
+
     public void testStartGame() {
     }
 
@@ -47,7 +48,7 @@ public class GoFishGameTest extends TestCase {
     public void testCheckWinner() {
     }
 
-    public void testResetGame() {
+    public void testResetGame1() {
         //Arrange
         Player player = new Player("Name", 100.0);
         GoFishGame game = new GoFishGame(player);
@@ -62,19 +63,25 @@ public class GoFishGameTest extends TestCase {
         Assert.assertEquals(expected,actual);
     }
 
-    public void testCheckPlayerHandForBooks() {
-        Player player1 = new Player("Bob", 100.0);
-        ArrayList<Card> hand = new ArrayList<>() ;
 
-    }
+    public void testResetGame() {
+        //Arrange
+        Player player = new Player("Chris", 100.0);
+        GoFishGame game = new GoFishGame(player);
+        Card card1 = new Card("Spades",2);
+        Card card2 = new Card("Clubs",2);
+        player.getHand().add(card1);
+        player.getHand().add(card2);
+
+        //Act
+        game.resetGame();
+        ArrayList<Card> expected = new ArrayList<>();
+        ArrayList<Card> actual = player.getHand();
+
+        //Assert
+        Assert.assertEquals(expected,actual);
 
 
-    public void testAIAskForCards(){
-        Player player1 = new Player("Chris", 100.0);
-        GoFishGame game = new GoFishGame(player1);
-        for(int i=0;i<1000;i++){
-            //System.out.println(game.aiAskForCards());
-        }
     }
 
     public void testCheckHandForBooks(){
