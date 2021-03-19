@@ -1,7 +1,11 @@
 package io.zipcoder.casino.GameInterface.DiceGame;
+import io.zipcoder.casino.Dice;
 import io.zipcoder.casino.GameInterface.GamblingGameInterface;
 import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CrapsGame extends DiceGame implements GamblingGameInterface {
 
@@ -60,6 +64,8 @@ public class CrapsGame extends DiceGame implements GamblingGameInterface {
 
     int point;
     int stageOfGame = 1;
+    Dice dice = new Dice();
+    HashMap<String,Integer> currentBets = new HashMap<>();
     Console myConsole = new Console(System.in,System.out);
     Player player;
 
@@ -71,7 +77,9 @@ public class CrapsGame extends DiceGame implements GamblingGameInterface {
 
         while(true){
             resetGame();
-            makeBet(); //Maybe make enums of all bet types? Maybe have player have ArrayList of bets to cycle through?
+            makeBet();
+            compareBetsToDiceRoll(dice.rollPairDice());
+
 
             if(!myConsole.displayPlayAgain("Craps")){
                 break;
@@ -84,15 +92,31 @@ public class CrapsGame extends DiceGame implements GamblingGameInterface {
 
     public void resetGame(){
         stageOfGame = 1;
+        currentBets.clear();
     }
 
     public void makeBet(){
-        int betChoice;
+        do{
+            String betChoice;
+            if(stageOfGame==1){
+                betChoice = myConsole.stageOneBettingPrompt(stageOfGame);
+                currentBets.add(betChoice);
+            }
+            else if(stageOfGame==2){
+                betChoice = myConsole.stageTwoBettingPrompt(stageOfGame);
+                currentBets.add(betChoice);
+            }
+        } while(myConsole.makeAnotherBet());
+    }
+
+    public void compareBetsToDiceRoll(int diceRoll){
         if(stageOfGame==1){
-            betChoice = myConsole.stageOneBettingPrompt(stageOfGame);
+            if(diceRoll==7 || diceRoll==11){
+
+            }
         }
         else if(stageOfGame==2){
-            betChoice = myConsole.stageTwoBettingPrompt(stageOfGame);
+
         }
 
     }
