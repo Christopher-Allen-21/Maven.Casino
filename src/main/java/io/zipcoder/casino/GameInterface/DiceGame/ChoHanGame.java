@@ -6,6 +6,8 @@ import io.zipcoder.casino.GameInterface.GameInterface;
 import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 
+import java.sql.SQLOutput;
+
 public class ChoHanGame implements GameInterface, GamblingGameInterface {
 
 
@@ -67,9 +69,20 @@ public class ChoHanGame implements GameInterface, GamblingGameInterface {
     }
 
     public void askWager () {
-        playerBet = myConsole.getDoubleInput("How much would you like to bet? Enter dollar amount.");
-        player1.placeBet(playerBet);
+        double playerCurrentBalance = player1.getPlayerBalance();
+        boolean redo = true;
+        while (redo) {
+            playerBet = myConsole.getDoubleInput("How much would you like to bet? Enter dollar amount.");
+            if (playerCurrentBalance < playerBet) {
+                System.out.println("Sorry, you don't have enough to wager that.");
+                redo = true;
+            } else {
+                player1.placeBet(playerBet);
                 System.out.println("You have wagered $" + playerBet + "\n");
+                redo = false;
+            }
+        }
+
     }
 
 
