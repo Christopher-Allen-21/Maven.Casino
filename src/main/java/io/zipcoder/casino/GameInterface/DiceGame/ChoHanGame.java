@@ -1,15 +1,17 @@
 package io.zipcoder.casino.GameInterface.DiceGame;
 
 import io.zipcoder.casino.Dice;
+import io.zipcoder.casino.GameInterface.GamblingGameInterface;
 import io.zipcoder.casino.GameInterface.GameInterface;
 import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 
-public class ChoHanGame implements GameInterface {
+import java.sql.SQLOutput;
+
+public class ChoHanGame implements GameInterface, GamblingGameInterface {
 
 
     private Console myConsole = new Console(System.in, System.out);
-
     private Player player1;
     private int rollValue;
     private double playerBet = 0.0;
@@ -29,14 +31,13 @@ public class ChoHanGame implements GameInterface {
         do {
             askEvenOdd();
             askWager();
-
             askRollDice();
     //            //printasciArt();
     //            //and value
             ifOdd();
             checkWinner();
     //            setPlayerBalance();
-    //            displaySummary();
+            displayPlayerBalance();
             redo = myConsole.displayPlayAgain("Cho-Han"); // Cho-Han
             } while (redo);
     //            quitGame();
@@ -44,7 +45,6 @@ public class ChoHanGame implements GameInterface {
     //            collectWinnings();
 
     }
-
 
 
     public void greetPlayer () {
@@ -57,21 +57,32 @@ public class ChoHanGame implements GameInterface {
         while (redo) {
             playerChoice = myConsole.getStringInput("Enter even or odd");
             if (playerChoice.equalsIgnoreCase("even")) {
-                playerChoice = "even";
+                playerChoice = "Even";
                 redo = false;
-            } else if (playerChoice.equals("odd")) {
-                playerChoice = "odd";
+            } else if (playerChoice.equalsIgnoreCase("odd")) {
+                playerChoice = "Odd";
                 redo = false;
             } else {
-                myConsole.getDoubleInput("Please enter 1 or 2"); // testing if 1 or 2
+                myConsole.getDoubleInput("Please enter even or odd");
             }
         }
     }
 
     public void askWager () {
-        playerBet = myConsole.getDoubleInput("How much would you like to bet? Enter dollar amount.");
-        player1.placeBet(playerBet);
+        double playerCurrentBalance = player1.getPlayerBalance();
+        boolean redo = true;
+        while (redo) {
+            playerBet = myConsole.getDoubleInput("How much would you like to bet? Enter dollar amount.");
+            if (playerCurrentBalance < playerBet) {
+                System.out.println("Sorry, you don't have enough to wager that.");
+                redo = true;
+            } else {
+                player1.placeBet(playerBet);
                 System.out.println("You have wagered $" + playerBet + "\n");
+                redo = false;
+            }
+        }
+
     }
 
 
@@ -102,29 +113,45 @@ public class ChoHanGame implements GameInterface {
 
     public void ifOdd () {
         if (rollValue % 2 != 0) {
-            System.out.println("\nYou rolled Odd");
+            System.out.println("\nYou rolled Odd, and you bet on " + playerChoice + ".\n");
             diceOddEven = true;  // true if roll is odd
         } else {
-            System.out.println("\nYou rolled Even");
+            System.out.println("\nYou rolled Even, and you bet on " + playerChoice + ".\n");
             diceOddEven = false;  // false if roll is even
         }
     }
 
-    @Override
+
     public void checkWinner () { // possibly use .checkWinner here from Game Interface
         if (playerChoice.equalsIgnoreCase("odd") && diceOddEven) {
             System.out.println("Congratulations, you win!");
-            //playerWinsBet ();
+            playerWinsBet();
         } else if (playerChoice.equalsIgnoreCase("even") && !diceOddEven) {
             System.out.println("Congratulations, you win!");
-            //playerWinsBet ();
+            playerWinsBet ();
         } else {
             System.out.println("Sorry, you lost! Better luck next time.\n");
-            //playerLosesBet ();
         }
 
     }
 
+    public void playerWinsBet() {
+        player1.collectWinnings(playerBet);
+    }
+
+    public void displayPlayerBalance() {
+       System.out.println("Your current balance is: $" + player1.getPlayerBalance());
+    }
+
+    @Override
+    public void playerHasNoMoney() {
+
+    }
+
+    @Override
+    public void playerLosesBet() {
+
+    }
 
 }
 
