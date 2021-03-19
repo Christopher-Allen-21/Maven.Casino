@@ -56,7 +56,6 @@ public class GoFishGame extends CardGame {
             if(!myConsole.displayPlayAgain("Go Fish")){
                 break;
             }
-
         }
     }
 
@@ -75,7 +74,7 @@ public class GoFishGame extends CardGame {
             deckIndex++;
 
         }
-        for(int i=0;i<8;i++){
+        for(int i=0;i<9;i++){
             aiPlayer.getSortedHand().add(deck.get(deckIndex));
             deckIndex++;
         }
