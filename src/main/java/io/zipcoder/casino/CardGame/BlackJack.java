@@ -9,10 +9,11 @@ import java.util.Objects;
 public class BlackJack extends CardGame implements GamblingGameInterface {
     private Console console = new Console(System.in,System.out);
     int deckIndex = 0;
+    private double playerBet = 0.0;
     Player player1;
-    Player dealer1 = new Player("Nobles");
-    Player dealer2 = new Player("Dolio");
-    Player dealer3 = new Player("Younger");
+    Player dealer1 = new Player("Nobles", 100.0);
+    Player dealer2 = new Player("Dolio",100.0);
+    Player dealer3 = new Player("Younger", 100.0);
     boolean gameOn = true;
     boolean hit = true;
 
@@ -26,6 +27,8 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
         while(gameOn) {
             resetGame();
             Collections.shuffle(deck);
+            System.out.println("Current Balance: " + player1.getPlayerBalance());
+            getBet ();
             dealCards();
             getPlayerTotal(player1);
             getPlayerTotal(dealer1);
@@ -54,6 +57,38 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
         dealer1.setHandTotal(0);
         dealer1.getHand().clear();
     }
+    public void getBet () {
+        playerBet = console.getDoubleInput("How much would you like to bet? Enter dollar amount.");
+        player1.placeBet(playerBet);
+        System.out.println("You have wagered $" + playerBet + "\n");
+    }
+    public void dealCards(){
+
+        while(player1.getHand().size() < 2) {
+            player1.getHand().add(deck.get(deckIndex));
+            deckIndex++;
+        }
+        while (dealer1.getHand().size() < 2) {
+            dealer1.getHand().add(deck.get(deckIndex));
+            deckIndex++;
+        }
+    }
+
+    public void getPlayerTotal(Player player){
+        int total = 0;
+        for(int i = 0; i < player.getHand().size(); i++){
+            if(player.getHand().get(i).getBlackJackValue() == 14 && total + 11 > 21) {
+                total += 1;
+            }
+            else if(player.getHand().get(i).getBlackJackValue() == 14){
+                total += 11;
+            }
+            else
+                total += player.getHand().get(i).getBlackJackValue();
+        }
+        player.setHandTotal(total);
+    }
+
 
     public void checkIfPlayerHit (){
         if (Objects.equals(console.askHitOrStay(), "hit")) {
@@ -76,42 +111,22 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
         }
     }
 
-
-    public void getPlayerTotal(Player player){
-        int total = 0;
-        for(int i = 0; i < player.getHand().size(); i++){
-            if(player.getHand().get(i).getBlackJackValue() == 14 && total + 11 > 21) {
-                total += 1;
-            }
-            else if(player.getHand().get(i).getBlackJackValue() == 14){
-                total += 11;
-            }
-            else
-            total += player.getHand().get(i).getBlackJackValue();
-        }
-        player.setHandTotal(total);
-    }
-
-
-
-    public void playerLosesBet () {
-    }
-    public void playerWinsBet () {
-    }
-    public void playerHasNoMoney () {
-    }
-
-
     public void checkWinner () {
         if((player1.getHandTotal() > dealer1.getHandTotal())   && player1.getHandTotal() < 22) {
             System.out.println(player1.getName() + " Wins");
+            playerWinsBet();
+            System.out.println("New Balance: " + player1.getPlayerBalance());
         }
         else if(player1.getHandTotal() < 22 && dealer1.getHandTotal() > 21){
             System.out.println(player1.getName() +" Wins");
+            playerWinsBet();
+            System.out.println("New Balance: " + player1.getPlayerBalance());
         }
 
         else if((dealer1.getHandTotal() > player1.getHandTotal())   && dealer1.getHandTotal() < 22) {
             System.out.println(player1.getName() + " Wins");
+            playerWinsBet();
+            System.out.println("New Balance: " + player1.getPlayerBalance());
         }
         else if(dealer1.getHandTotal() < 22 && player1.getHandTotal() > 21){
             System.out.println(dealer1.getName()+" Wins");
@@ -124,18 +139,21 @@ public class BlackJack extends CardGame implements GamblingGameInterface {
 
     }
 
-    public void dealCards(){
 
-        while(player1.getHand().size() < 2) {
-            player1.getHand().add(deck.get(deckIndex));
-            deckIndex++;
-        }
-        while (dealer1.getHand().size() < 2) {
-            dealer1.getHand().add(deck.get(deckIndex));
-            deckIndex++;
-        }
 
+
+    public void playerLosesBet () {
     }
+    public void playerWinsBet () {
+        player1.collectWinnings(playerBet);
+    }
+    public void playerHasNoMoney () {
+    }
+
+
+
+
+
 
     public void addCard(){
         player1.getHand().add(deck.get(deckIndex));

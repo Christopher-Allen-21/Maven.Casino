@@ -39,14 +39,14 @@ public class GoFishGameTest extends TestCase {
     }
 
     public void testCheckPlayerHandForBooks() {
-        Player player1 = new Player("Bob");
+        Player player1 = new Player("Bob", 100.0);
         ArrayList<Card> hand = new ArrayList<>() ;
 
     }
 
 
     public void testAIAskForCards(){
-        Player player1 = new Player("Chris");
+        Player player1 = new Player("Chris", 100.0);
         GoFishGame game = new GoFishGame(player1);
         for(int i=0;i<1000;i++){
             //System.out.println(game.aiAskForCards());
@@ -55,7 +55,7 @@ public class GoFishGameTest extends TestCase {
 
     public void testCheckHandForBooks(){
         //Arrange
-        Player player = new Player("Chris");
+        Player player = new Player("Chris", 100.0);
         GoFishGame game = new GoFishGame(player);
         Card card1 = new Card("Spades",2);
         Card card2 = new Card("Clubs",2);
@@ -77,7 +77,7 @@ public class GoFishGameTest extends TestCase {
 
     public void testCheckHandForBooks2(){
         //Arrange
-        Player player = new Player("Chris");
+        Player player = new Player("Chris", 100.0);
         GoFishGame game = new GoFishGame(player);
         Card card1 = new Card("Spades",3);
         Card card2 = new Card("Clubs",3);

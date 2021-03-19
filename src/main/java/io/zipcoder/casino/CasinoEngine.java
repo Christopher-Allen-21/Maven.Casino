@@ -12,11 +12,11 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class CasinoEngine {
-    GamblingPlayer currentPlayer;
+    Player currentPlayer;
     Console myConsole;
 
     public CasinoEngine(){
-        currentPlayer = new GamblingPlayer("Player1", 100.0);
+        currentPlayer = new Player("Player1", 100.0);
         myConsole = new Console(System.in,System.out);
     }
 
@@ -30,7 +30,7 @@ public class CasinoEngine {
                 runCraps(currentPlayer);
             }
             else if(gameSelection.equals("3")){
-               // runChoHan(currentPlayer);
+                runChoHan(currentPlayer);
             }
             else if(gameSelection.equals("4")){
                 runGoFish(currentPlayer);
@@ -61,7 +61,7 @@ public class CasinoEngine {
     }
 
 
-    public void runChoHan(GamblingPlayer currentPlayer){
+    public void runChoHan(Player currentPlayer){
         System.out.print("Entering Cho Han\n\n");
         ChoHanGame choHan = new ChoHanGame(currentPlayer);
         choHan.startGame();
