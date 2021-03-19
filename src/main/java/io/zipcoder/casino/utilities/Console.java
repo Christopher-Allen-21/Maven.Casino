@@ -113,7 +113,7 @@ public final class Console {
     public void displayHandAndBooks(int index, String playerName, ArrayList<Card> hand, Integer playerNumBooks, Integer aiNumBooks,Integer bookTotal){
         System.out.println("Book Total: "+bookTotal);
         System.out.println("Deck Index: "+index);
-        System.out.println("AI Number of Books: "+aiNumBooks+"\n");
+        System.out.println("Nobles Number of Books: "+aiNumBooks+"\n");
         System.out.println("Player: "+playerName);
         System.out.println("Number of Books: "+playerNumBooks);
         System.out.println("Current Hand:");
@@ -171,31 +171,31 @@ public final class Console {
 
 
     public String stageOneBettingPrompt(int stageOfGame){
-        System.out.println("Stage of Game: "+stageOfGame);
+        System.out.println("Stage of Game: "+stageOfGame+"\n");
         while(true) {
             println("Please enter a number to select a bet:");
             println("1. Pass Line bet");
             println("2. Don't Pass Line bet");
-            println("3. Non-Field bet");
+            //println("3. Non-Field bet");
             String userInput = input.nextLine();
             if(userInput.equals("1")){
-                return "passbet";
+                return "passLineBet";
             }
             else if(userInput.equals("2")){
-                return "dontPassBet";
+                return "dontPassLineBet";
             }
-            else if(userInput.equals("3")){
-                return "nonFieldBet";
-            }
+            //else if(userInput.equals("3")){
+            //    return "nonFieldBet";
+            //}
         }
     }
 
     public String stageTwoBettingPrompt(int stageOfGame) {
-        System.out.println("Stage of Game: " + stageOfGame);
+        System.out.println("Stage of Game: " + stageOfGame+"\n");
         while (true) {
             println("Please enter a number to select a bet:");
-            println("1. Come Line bet");
-            println("2. Don't Come Line bet");
+            println("1. Come Line bet (Betting Point will roll again before 7)");
+            println("2. Don't Come Line bet (Betting 7 will roll again before Point)");
             //println("3. Field bet");
             //println("4. Non-Field bet");
             //println("5. Place bet");
