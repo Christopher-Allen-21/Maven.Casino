@@ -12,6 +12,58 @@ import java.util.Random;
 public class GoFishGameTest extends TestCase {
 
 
+    public void testStartGame() {
+    }
+
+    public void testDealCards() {
+        //Arrange
+        Player player = new Player("Name", 100.0);
+        GoFishGame game = new GoFishGame(player);
+        player.getHand().clear();
+
+        //Action
+        game.dealCards();
+        int expected = 9;
+        int actual = player.getHand().size();
+
+        //Assert
+        Assert.assertEquals(expected,actual);
+    }
+
+    public void testPlayerAskForCards() {
+    }
+
+    public void testAiAskForCards() {
+    }
+
+    public void testCheckAIHand() {
+    }
+
+    public void testCompareNumBooks() {
+    }
+
+    public void testPassPlayCard() {
+    }
+
+    public void testCheckWinner() {
+    }
+
+    public void testResetGame1() {
+        //Arrange
+        Player player = new Player("Name", 100.0);
+        GoFishGame game = new GoFishGame(player);
+        game.dealCards();
+
+        //Action
+        game.resetGame();
+        int expected = 0;
+        int actual = player.getHand().size();
+
+        //Assert
+        Assert.assertEquals(expected,actual);
+    }
+
+
     public void testResetGame() {
         //Arrange
         Player player = new Player("Chris", 100.0);
