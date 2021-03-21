@@ -110,24 +110,26 @@ public class CrapsGame extends DiceGame implements GamblingGameInterface {
 
     public void makeBet(){
             String betChoice;
-            double betAmount = 0;
+            double betAmount = -1;
             if(stageOfGame==1){
                 betChoice = myConsole.stageOneBettingPrompt(stageOfGame,player);
-                //bet amount doesn't check whether they have enough money in balance currently
-                betAmount = myConsole.getDoubleInput("How much would you like to bet? Enter dollar amount.");
+                while(betAmount<0 || betAmount> player.getPlayerBalance()){
+                    betAmount = myConsole.getDoubleInput("How much would you like to bet? Enter dollar amount.");
+                }
                 currentBets.put(betChoice,betAmount);
             }
             else if(stageOfGame==2){
                 betChoice = myConsole.stageTwoBettingPrompt(stageOfGame,player,point);
-                //bet amount doesn't check whether they have enough money in balance currently
-                betAmount = myConsole.getDoubleInput("How much would you like to bet? Enter dollar amount.");
+                while (betAmount<0 || betAmount> player.getPlayerBalance()) {
+                    betAmount = myConsole.getDoubleInput("How much would you like to bet? Enter dollar amount.");
+                }
                 currentBets.put(betChoice,betAmount);
             }
     }
 
     public void compareBetsToDiceRoll(int diceRoll){
 
-        String rollDicePrompt = myConsole.getStringInput("Press any button to roll the dice:\n");
+        String rollDicePrompt = myConsole.getStringInput("Press any button to roll the dice:");
 
         if(rollDicePrompt != null) {
             myConsole.println("\nYou have rolled a " + diceRoll + "!");
