@@ -109,7 +109,6 @@ public class CrapsGame extends DiceGame implements GamblingGameInterface {
     }
 
     public void makeBet(){
-        do{
             String betChoice;
             double betAmount = 0;
             if(stageOfGame==1){
@@ -124,33 +123,32 @@ public class CrapsGame extends DiceGame implements GamblingGameInterface {
                 betAmount = myConsole.getDoubleInput("How much would you like to bet? Enter dollar amount.");
                 currentBets.put(betChoice,betAmount);
             }
-        } while(myConsole.makeAnotherBet());
     }
 
     public void compareBetsToDiceRoll(int diceRoll){
-        myConsole.println("You have rolled a " + diceRoll + "!");
-        if(stageOfGame==1){
-            if(diceRoll==7 || diceRoll==11){
-                passLineBet7Or11();
-            }
-            else if(diceRoll==2 || diceRoll==3 || diceRoll==12){
-                passLineBet2_3_12();
-            }
-            else{
-                stageOfGame = 2;
-                point = diceRoll;
-                myConsole.println(point+" is now the Point");
-            }
-        }
-        else if(stageOfGame==2){
-            if(diceRoll==7){
-                comeLineBet_7();
-            }
-            else if(diceRoll==point){
-                comeLineBet_point();
-            }
-            else if(diceRoll!=7 || diceRoll!=point){
-                myConsole.println("No winner! Rolling again!");
+
+        String rollDicePrompt = myConsole.getStringInput("Press any button to roll the dice:\n");
+
+        if(rollDicePrompt != null) {
+            myConsole.println("\nYou have rolled a " + diceRoll + "!");
+            if (stageOfGame == 1) {
+                if (diceRoll == 7 || diceRoll == 11) {
+                    passLineBet7Or11();
+                } else if (diceRoll == 2 || diceRoll == 3 || diceRoll == 12) {
+                    passLineBet2_3_12();
+                } else {
+                    stageOfGame = 2;
+                    point = diceRoll;
+                    myConsole.println("No winner!\n" + point + " is now the Point\nRolling again!");
+                }
+            } else if (stageOfGame == 2) {
+                if (diceRoll == 7) {
+                    comeLineBet_7();
+                } else if (diceRoll == point) {
+                    comeLineBet_point();
+                } else if (diceRoll != 7 || diceRoll != point) {
+                    myConsole.println("No winner! Rolling again!");
+                }
             }
         }
     }

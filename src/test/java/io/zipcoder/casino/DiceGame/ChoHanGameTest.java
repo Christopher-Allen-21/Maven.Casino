@@ -25,16 +25,16 @@ public class ChoHanGameTest {
 
     }
 
-    @Test
-    public void ifOdd() {
-        // Arrange
-        Player p1 = new Player("Kells", 100.0);
-        ChoHanGame testGame = new ChoHanGame(p1);
-        // Act
-        String returned = testConsole.playerChoice;
-        // Assert
-
-    }
+//    @Test
+//    public void ifOdd() {
+//        // Arrange
+//        Player p1 = new Player("Kells", 100.0);
+//        ChoHanGame testGame = new ChoHanGame(p1);
+//        // Act
+//        String returned = testConsole.playerChoice;
+//        // Assert
+//
+//    }
 
     @Test
     public void checkWinner() {
