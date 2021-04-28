@@ -2,6 +2,11 @@
 * Objective:
   * To create a casino simulation.
 
+## Contributors
+- Chris Allen - @christopher-allen-21
+- Jorge Tapia - @jorget93
+- Kelly Porter - @kellyporter02
+
 ## Minimum Viable Product (MVP)
 * Your application must have at the very least 4 games:
   * Go Fish a card game
